@@ -1,4 +1,4 @@
-package com.nanxiaoqiang.test.javastudytest.util.concurrent;
+package com.nanxiaoqiang.test.javastudytest.util.concurrent.threadpool;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
