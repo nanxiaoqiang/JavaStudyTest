@@ -1,0 +1,20 @@
+Getting Started with Storm
+Continuous streaming computation with Twitter's cluster technology
+By Jonathan Leibiusky, Gabriel Eisbruch, Dario Simonassi
+Publisher: O'Reilly Media
+Released: August 2012
+Pages: 106
+
+
+Even as big data is turning the world upside down, the next phase of the revolution is already taking shape: real-time data analysis. This hands-on guide introduces you to Storm, a distributed, JVM-based system for processing streaming data. Through simple tutorials, sample Java code, and a complete real-world scenario, you’ll learn how to build fast, fault-tolerant solutions that process results as soon as the data arrives.
+
+Discover how easy it is to set up Storm clusters for solving various problems, including continuous data computation, distributed remote procedure calls, and data stream processing.
+
+    Learn how to program Storm components: spouts for data input and bolts for data transformation
+    Discover how data is exchanged between spouts and bolts in a Storm topology
+    Make spouts fault-tolerant with several commonly used design strategies
+    Explore bolts—their life cycle, strategies for design, and ways to implement them
+    Scale your solution by defining each component’s level of parallelism
+    Study a real-time web analytics system built with Node.js, a Redis server, and a Storm topology
+    Write spouts and bolts with non-JVM languages such as Python, Ruby, and Javascript
+
