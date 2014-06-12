@@ -15,32 +15,34 @@ public class IscsDicValue implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	// SELECT
-	// id;
-	// line_id;
-	// station_id;
-	// station_code;
-	// system;
-	// subsystem;
-	// station_type;
-	// device_type;
-	// device_num;
-	// switch_num;
-	// point_description;
-	// final_point_description;
-	// address_1;
-	// address_2;
-	// point_type;
-	// status_00;
-	// status_01;
-	// status_10;
-	// status_11;
-	// unit;
-	// ratio;
-	// offset;
-	// is_alarm;
-	// alarm_level
+	// id,
+	// line_id,
+	// station_id,
+	// station_code,
+	// system,
+	// subsystem,
+	// station_type,
+	// device_type,
+	// device_num,
+	// switch_num,
+	// point_description,
+	// final_point_description,
+	// address_1,
+	// address_2,
+	// point_type,
+	// status_00,
+	// status_01,
+	// status_10,
+	// status_11,
+	// unit,
+	// ratio,
+	// offset,
+	// is_alarm,
+	// alarm_level,
+	// alarm_value
 	// FROM bjmetro.bjmetro_iscs_dic
-	// LIMIT 0; 1000;
+	// LIMIT 0, 1000;
+
 	/**
 	 * id序列号
 	 */
@@ -155,12 +157,17 @@ public class IscsDicValue implements Serializable {
 	/**
 	 * 是否是报警
 	 */
-	private Integer is_alarm;
+	private Integer is_alarm = 0;
 
 	/**
 	 * 报警级别
 	 */
 	private Integer alarm_level;
+
+	/**
+	 * 报警值
+	 */
+	private String alarm_value;
 
 	/**
 	 * 点的实际值<br/>
@@ -379,6 +386,14 @@ public class IscsDicValue implements Serializable {
 
 	public void setAlarm_level(Integer alarm_level) {
 		this.alarm_level = alarm_level;
+	}
+
+	public String getAlarm_value() {
+		return alarm_value;
+	}
+
+	public void setAlarm_value(String alarm_value) {
+		this.alarm_value = alarm_value;
 	}
 
 	public String getValue() {

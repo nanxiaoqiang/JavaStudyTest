@@ -59,19 +59,19 @@ public class GetUpdate implements IRichBolt {
 		if (MemObject.getInstance().getMap().containsKey(iv.getId())) {
 			IscsDicValue idv = MemObject.getInstance().getMap().get(iv.getId());
 			if (idv.getUpdateTime() < iv.getTime()) {
-				if (!StringUtils.equals(idv.getValue(), (iv.getValue()))) {
+				if (!StringUtils.equals(idv.getValue(), iv.getValue())) {
 					idv.setValue(iv.getValue());
 					idv.setUpdateTime(iv.getTime());
+
 					// 更新内存：
 					MemObject.getInstance().getMap().put(idv.getId(), idv);
 					// 发送更新量
-					// collector.emit(new Values(new IscsValue(iv)));
+					collector.emit(new Values(new IscsValue(iv)));
 					// 日志输出一下：
-					logger.info("有更新：" + iv);
+					// logger.info("有更新：" + iv);
 				}
 			}
 		}
-
 	}
 
 	@Override

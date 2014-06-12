@@ -2,6 +2,7 @@ package com.nanxiaoqiang.test.storm.helloworld2.entity;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -106,5 +107,7 @@ public class IscsValue implements Serializable {
 	public static void main(String[] args) {
 		IscsValue iv = new IscsValue(1L, "12", 1234567890L);
 		System.out.println(iv);
+		for (int i = 0; i < 100; i++)
+			System.out.println(RandomUtils.nextInt(0, 2));
 	}
 }
