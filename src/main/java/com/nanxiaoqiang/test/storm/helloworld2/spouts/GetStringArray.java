@@ -36,7 +36,6 @@ public class GetStringArray implements IRichSpout {
 	@SuppressWarnings("unused")
 	private TopologyContext context;
 	private SpoutOutputCollector collector;
-	private String[] strArr;
 	private List<String> strList;
 
 	public GetStringArray() {
@@ -110,6 +109,7 @@ public class GetStringArray implements IRichSpout {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void open(@SuppressWarnings("rawtypes") Map conf,
 			TopologyContext context, SpoutOutputCollector collector) {
