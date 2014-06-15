@@ -3,7 +3,9 @@ package com.nanxiaoqiang.test.javastudytest.lang.system;
 import java.lang.management.ManagementFactory;
 
 /**
- * 得到当前系统的pid
+ * Properties其实这个类主要在读取配置文件中应用，也可以读取系统变量<br/>
+ * 得到当前系统的pid<br/>
+ * 查看系统环境变量
  * 
  * @author nanxiaoqiang
  * 
@@ -26,6 +28,10 @@ public class SystemTest {
 		// get pid
 		String pid = name.split("@")[0];
 		System.out.println("Pid is:" + pid + "  |mem is " + mem);
+
+		System.out.println(System.getProperties());
+
+		System.out.println("PATH=" + System.getProperty("$PATH"));
 
 		for (int i = 0; i < 20; i++) {
 			Thread.sleep(10000);
