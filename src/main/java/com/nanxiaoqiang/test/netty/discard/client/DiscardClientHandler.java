@@ -26,7 +26,9 @@ public class DiscardClientHandler extends SimpleChannelInboundHandler<String> {
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
 		this.ctx = ctx;
-
+		// 在客户端和服务端，channel的id是不一样的。
+		logger.info(ctx.channel().id().asLongText() + "|"
+				+ ctx.channel().id().asShortText());
 		// 初始化Message
 		// 长度为DiscardClient.SIZE
 		// 默认一个是NULL的内容
