@@ -11,6 +11,8 @@ import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.base.BaseRichBolt;
 import backtype.storm.tuple.Tuple;
 
+import com.nanxiaoqiang.test.storm.helloworld3.entity.StormMqObject;
+
 /**
  * 
  * @author nanxiaoqiang
@@ -49,10 +51,14 @@ public class ToOpcMqBolt extends BaseRichBolt {
 
 	@Override
 	public void execute(Tuple input) {
-		
+		logger.debug("execute");
 		// 得到数据，解析，并且发送给MQ
 
-		// 
+		/************* 例子START ***************/
+		StormMqObject smo = (StormMqObject) input.getValue(1);
+		logger.info(smo.getCorrelationId() + "|" + smo.getValues().size() + "|"
+				+ smo.getTime());
+		/************* 例子 END ***************/
 	}
 
 	/*
