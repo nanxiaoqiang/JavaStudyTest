@@ -17,12 +17,12 @@
 
 		<!-- Jar包的属性定义 -->
 		<joda-time.version>2.3</joda-time.version>
-		<activemq.version>5.9.1</activemq.version>
+		<activemq.version>5.10.0</activemq.version>
 		<mysql.jdbc.driver.version>5.1.30</mysql.jdbc.driver.version>
 		<oracle.jdbc.driver.version>11.2.0.1</oracle.jdbc.driver.version>
 		<commons-collections4.version>4.0</commons-collections4.version>
 		<commons-configuration.version>1.10</commons-configuration.version>
-		<commons-dbcp2.version>2.0</commons-dbcp2.version>
+		<commons-dbcp2.version>2.0.1</commons-dbcp2.version>
 		<commons-dbutils.version>1.5</commons-dbutils.version>
 		<commons-io.version>2.4</commons-io.version>
 		<commons-lang3.version>3.3.2</commons-lang3.version>
@@ -41,6 +41,13 @@
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 			<version>${joda-time.version}</version>
+		</dependency>
+
+		<!-- ActiveMQ -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-broker</artifactId>
+			<version>${activemq.version}</version>
 		</dependency>
 
 		<!-- Apache commons collections4 -->
