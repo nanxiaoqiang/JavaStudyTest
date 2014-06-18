@@ -20,9 +20,10 @@ public class Constants {
 	}
 
 	// MQ
-	public static final String QUEUE_URL = "queue_url";
-	public static final String QUEUE_USR = "queue_usr";
-	public static final String QUEUE_PWD = "queue_pwd";
+	public static final String MQ_URL = "mq_url";
+	public static final String MQ_QUEUE = "mq_queue";
+	public static final String MQ_USR = "mq_usr";
+	public static final String MQ_PWD = "mq_pwd";
 	// database:oracle、mysql、postgresql、sqlserver
 	public static final String DATABASE_JDBC_DRIVER = "database_jdbc_driver";
 	public static final String DATABASE_URL = "database_url";

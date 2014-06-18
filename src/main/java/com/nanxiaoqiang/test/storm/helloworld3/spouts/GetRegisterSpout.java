@@ -2,6 +2,9 @@ package com.nanxiaoqiang.test.storm.helloworld3.spouts;
 
 import java.util.Map;
 
+import javax.jms.JMSException;
+
+import org.apache.commons.lang.math.RandomUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,6 +19,7 @@ import com.google.common.collect.Maps;
 import com.nanxiaoqiang.test.storm.helloworld3.common.Constants;
 import com.nanxiaoqiang.test.storm.helloworld3.entity.IscsValue;
 import com.nanxiaoqiang.test.storm.helloworld3.entity.StormMqObject;
+import com.nanxiaoqiang.test.storm.helloworld3.jms.activemq.ActiveMqClient;
 
 /**
  * 获取寄存器的初始程序，起始节点。<br/>
@@ -34,8 +38,8 @@ import com.nanxiaoqiang.test.storm.helloworld3.entity.StormMqObject;
  *                                                                     -->加减实时车站报警类型count
  *                                                                     -->add并统计单日车站报警类型count
  *                                                                     -->发送给Socket服务端做前台交互
- *                             -->
- * 4)
+ *                             -->其他的可能的实时数据展示。
+ * 4)etc…
  * </pre>
  * 
  * @author nanxiaoqiang
@@ -57,19 +61,29 @@ public class GetRegisterSpout extends BaseRichSpout {
 
 	// MQ的配置文件
 	/**
-	 * ActiveMQ的队列地址
+	 * ActiveMQ的地址
 	 */
-	private String queue_url;
+	private String mq_url;
+
+	/**
+	 * ActiveMQ的队列名称
+	 */
+	private String mq_queue;
 
 	/**
 	 * ActiveMQ的用户名
 	 */
-	private String queue_usr;
+	private String mq_usr;
 
 	/**
 	 * ActiveMQ的密码
 	 */
-	private String queue_pwd;
+	private String mq_pwd;
+
+	/**
+	 * ActiveMQ客户端，用于读取
+	 */
+	private ActiveMqClient activeMqClient;
 
 	// private Map<Long, IscsValue> updates = Maps.newConcurrentMap();
 
@@ -89,22 +103,27 @@ public class GetRegisterSpout extends BaseRichSpout {
 	public void open(Map conf, TopologyContext context,
 			SpoutOutputCollector collector) {
 		logger.debug("open");
-		// this.context = context;
+
+		this.collector = collector;
+
 		// 实际情况：
 		// 应当从conf得到配置文件，然后启动一个读取MQ的实例。
-		queue_url = conf.get(Constants.QUEUE_URL).toString();
-		queue_usr = conf.get(Constants.QUEUE_USR).toString();
-		queue_pwd = conf.get(Constants.QUEUE_PWD).toString();
+		mq_url = conf.get(Constants.MQ_URL).toString();
+		mq_queue = conf.get(Constants.MQ_QUEUE).toString();
+		mq_usr = conf.get(Constants.MQ_USR).toString();
+		mq_pwd = conf.get(Constants.MQ_PWD).toString();
 
-		// 在此处根据得到的三个参数，或者还有更多的参数。得到MQ的寄存器信息（String[]）
-		// 然后在nextTuple中传送给其他的节点。
+		// init database reader here
 		// 得到数据库信息，放到内存中
 
 		// init MQ here
-
-		// init database reader here
-
-		this.collector = collector;
+		try {
+			activeMqClient = new ActiveMqClient(mq_url, mq_queue, mq_usr,
+					mq_pwd, "GetRegisterSpoutActiveMqReadNamedThread");
+		} catch (JMSException e) {
+			logger.error(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -116,14 +135,48 @@ public class GetRegisterSpout extends BaseRichSpout {
 		String correlationId;
 		// 方案2:
 		// 用初始化MQ程序去读取寄存器信息，并得到update变量和correlation ID。
-
+		// 返回一个StormMqObject对象。
+		// 最好能够指定的把数据给某个下行的bolt
 		Map<Long, IscsValue> updates = Maps.newConcurrentMap();
 		// 以下需要
 		// if(读取结果 == null || 读取结果大小 ＝＝ 0 ) {
-		// try{}catch(InterrupedException e){logger.error("出错了！")}
+		// try{
+		// // 休息1秒
+		// Thread.sleep(1000);
+		// }catch(InterrupedException e){logger.error("出错了！");}
 		// }else{
 		StormMqObject smo = new StormMqObject();
-		collector.emit(new Values(smo.getCorrelationId(), smo));
+
+		/************* 例子START ***************/
+
+		Object obj = this.activeMqClient.receive();
+		if (obj == null) {
+			logger.debug("取出来的东西是个空的!");
+			try {
+				// 休息1秒
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				logger.error("线程休眠1sec出错了！");
+			}
+		} else {
+			// 此处的例子接收一个TextMessage，内容为id,value;id,value;longUtcTime
+			if (obj instanceof String) {
+				String[] objs = ((String) obj).split(";");
+				for (int i = 0; i < objs.length - 1; i++) {
+					String[] temp = objs[i].split(",");
+					IscsValue iv = new IscsValue(Long.parseLong(temp[0]),
+							temp[1]);
+					updates.put(iv.getId(), iv);
+				}
+				int i = RandomUtils.nextInt(5);
+				smo.setCorrelationId("test" + i);
+				smo.setValues(updates);
+				smo.setTime(Long.parseLong(objs[objs.length - 1]));
+				collector.emit(new Values(smo.getCorrelationId(), smo));
+			}
+		}
+		/************* 例子 END ***************/
+		// collector.emit(new Values(smo.getCorrelationId(), smo));
 		// }
 	}
 
@@ -138,6 +191,19 @@ public class GetRegisterSpout extends BaseRichSpout {
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
 		logger.debug("declareOutputFields");
 		declarer.declare(new Fields("correlationId", "updateDatas"));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see backtype.storm.topology.base.BaseRichSpout#close()
+	 */
+	@Override
+	public void close() {
+		super.close();
+		logger.debug("close");
+		// 关闭ActiveMQ的连接
+		this.activeMqClient.close();
 	}
 
 }
