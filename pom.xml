@@ -33,6 +33,7 @@
 		<mina.version>2.0.7</mina.version>
 		<thrift.version>0.9.1</thrift.version>
 		<storm.version>0.9.1-incubating</storm.version>
+		<jackson.version>2.4.1</jackson.version>
 	</properties>
 
 	<dependencies>
@@ -142,6 +143,13 @@
 			<groupId>org.apache.storm</groupId>
 			<artifactId>storm-core</artifactId>
 			<version>${storm.version}</version>
+		</dependency>
+
+		<!-- FastXML Jackson core JSON -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
 		</dependency>
 	</dependencies>
 

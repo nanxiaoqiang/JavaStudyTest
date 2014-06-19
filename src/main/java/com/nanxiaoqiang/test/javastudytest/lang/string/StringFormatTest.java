@@ -1,5 +1,7 @@
 package com.nanxiaoqiang.test.javastudytest.lang.string;
 
+import org.apache.commons.lang3.math.NumberUtils;
+
 /**
  * StringFormat
  * 
@@ -26,7 +28,14 @@ public class StringFormatTest {
 		long end2 = System.currentTimeMillis();
 		System.out.println(end2 - start2);
 		System.out.println(str2);
-
+		System.out.println(String.format("%03d", 11));
+		System.out.println(str.length() + "|"
+				+ Integer.toHexString(str.length()));
+		byte[] bs = "21900000".getBytes();
+		for (byte b : bs) {
+			System.out.print(b + ",");
+		}
+		System.out.print("\r\n");
 	}
 
 }

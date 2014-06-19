@@ -2,6 +2,7 @@ package com.nanxiaoqiang.test.netty.hpsocketconn.server;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufUtil;
+import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.CharsetUtil;
@@ -12,6 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joda.time.DateTime;
 
+@Sharable
 public class DiscardServerObjectHandler extends
 		SimpleChannelInboundHandler<Object> {
 

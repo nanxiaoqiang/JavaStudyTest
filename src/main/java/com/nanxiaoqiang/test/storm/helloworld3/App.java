@@ -34,8 +34,8 @@ public class App {
 		LocalCluster cluster = new LocalCluster();
 		cluster.submitTopology("Getting-Started-Topologie", conf,
 				builder.createTopology());
-		Thread.sleep(6000);
-		cluster.shutdown();
+		// Thread.sleep(6000);
+		// cluster.shutdown();
 	}
 
 }
