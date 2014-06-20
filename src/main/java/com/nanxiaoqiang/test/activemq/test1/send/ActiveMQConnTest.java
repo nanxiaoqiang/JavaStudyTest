@@ -53,7 +53,7 @@ public class ActiveMQConnTest {
 		MQ_Conn.setClientID("nanxiaoqiang");
 		MQ_Conn.start();
 		logger.info("ActiveMQ 连接成功！");
-		session = MQ_Conn.createSession(Boolean.TRUE, Session.AUTO_ACKNOWLEDGE);
+		session = MQ_Conn.createSession(Boolean.FALSE, Session.AUTO_ACKNOWLEDGE);
 		destination = session.createQueue(QUEUE_NAME);
 		logger.info("连接队列成功:" + QUEUE_NAME);
 		// 得到消息生成者【发送者】
@@ -156,7 +156,7 @@ public class ActiveMQConnTest {
 					for (int i = 0; i < 20; i++) {
 						// 构造消息
 						sendMessage(session, producer);
-						session.commit();
+						// session.commit();
 						logger.info("session.commit()");
 						Thread.sleep(500);
 					}
