@@ -153,4 +153,15 @@ public class NettyClient {
 	public void shutdown() {
 		this.group.shutdownGracefully();
 	}
+	
+	public static void main(String[] args){
+		NettyClientConfig c = new NettyClientConfig();
+
+		NettyClient c1 = new NettyClient(c,"localhost",8080);
+		NettyClient c2 = new NettyClient(c,"localhost",8080);
+		NettyClient c3 = new NettyClient(c,"localhost",8080);
+		NettyClient c4 = new NettyClient(c,"localhost",8080);
+		
+		c1.send("wowowo");
+	}
 }
