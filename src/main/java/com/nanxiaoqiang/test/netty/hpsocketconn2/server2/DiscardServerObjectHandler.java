@@ -112,18 +112,30 @@ public class DiscardServerObjectHandler extends ChannelHandlerAdapter {
 		// }
 		// logger.info("line.separator:" +
 		// System.getProperty("line.separator"));
-		String r = "byte发送" + msg.toString();
-		byte[] b = (r + System.getProperty("line.separator")).getBytes();
-		ByteBuf bf = Unpooled.buffer(b.length);
-		bf.writeBytes(b);
-		logger.debug("channelGroups:" + channelGroups.size());
-		channelGroups.writeAndFlush(bf);
+		if (msg.toString().startsWith("心跳")) {
+			logger.debug("收到心跳包：" + msg.toString());
+			String r = "收到" + msg.toString();
+			byte[] b = (r + System.getProperty("line.separator")).getBytes();
+			ByteBuf bf = Unpooled.buffer(b.length);
+			bf.writeBytes(b);
+			logger.debug("channelGroups:" + channelGroups.size());
+			ctx.writeAndFlush(bf);
+			logger.debug("给channel" + ctx.channel().id().asShortText() + "发送了:"
+					+ r);
+		} else {
+			String r = "byte发送" + msg.toString();
+			byte[] b = (r + System.getProperty("line.separator")).getBytes();
+			ByteBuf bf = Unpooled.buffer(b.length);
+			bf.writeBytes(b);
+			logger.debug("channelGroups:" + channelGroups.size());
+			channelGroups.writeAndFlush(bf);
+			logger.debug("发送了:" + r);
+		}
 		// for (Channel c : channelGroups) {
 		// logger.info(c.isActive() + "|" + c.isOpen() + "|"
 		// + c.isRegistered() + "|" + c.isWritable());
 		// c.writeAndFlush(bf);
 		// }
-		logger.debug("发送了:" + r);
 	}
 
 	@Override

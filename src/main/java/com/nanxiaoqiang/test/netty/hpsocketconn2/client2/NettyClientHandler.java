@@ -9,7 +9,6 @@ import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 
 import java.net.InetSocketAddress;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,9 +18,9 @@ public class NettyClientHandler extends ChannelHandlerAdapter {
 	private static Logger logger = LogManager
 			.getLogger(NettyClientHandler.class.getName());
 
-	private AtomicInteger i = new AtomicInteger(0);
-
-	private ChannelHandlerContext ctx;
+	// private AtomicInteger i = new AtomicInteger(0);
+	//
+	// private ChannelHandlerContext ctx;
 
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
@@ -53,7 +52,7 @@ public class NettyClientHandler extends ChannelHandlerAdapter {
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
 		logger.debug("channelActive");
-		this.ctx = ctx;
+		// this.ctx = ctx;
 	}
 
 	@Override
@@ -63,42 +62,29 @@ public class NettyClientHandler extends ChannelHandlerAdapter {
 		if (!(evt instanceof IdleStateEvent)) {
 			return;
 		}
-		String r = "心跳" + System.currentTimeMillis();
-		byte[] b = (r + System.getProperty("line.separator")).getBytes();
-		ByteBuf bf = Unpooled.buffer(b.length);
-		bf.writeBytes(b);
-		ctx.writeAndFlush(bf);
-		logger.debug("send:" + r);
-		// IdleStateEvent e = (IdleStateEvent) evt;
-		// long time = System.currentTimeMillis();
-		// ByteBuf bf = null;
-		// String idleMsg = null;
-		// // byte[] b;
-		// if (e.state() == IdleState.ALL_IDLE) {
-		// logger.debug("userEventTriggered:ALL_IDLE");
-		// idleMsg = "ALL_IDLE" + time + System.getProperty("line.separator");
-		// byte[] b = idleMsg.getBytes();
-		// bf = Unpooled.buffer(b.length);
-		// bf.writeBytes(b);
-		// ctx.writeAndFlush(bf);
-		// logger.debug("send:" +idleMsg);
-		// } else if (e.state() == IdleState.READER_IDLE) {
-		// logger.debug("userEventTriggered:READER_IDLE");
-		// idleMsg = "READER_IDLE" + time
-		// + System.getProperty("line.separator");
-		// byte[] b = idleMsg.getBytes();
-		// bf = Unpooled.buffer(b.length);
-		// ctx.writeAndFlush(bf);
-		// logger.debug("send:" +idleMsg);
-		// } else if (e.state() == IdleState.WRITER_IDLE) {
-		// logger.debug("userEventTriggered:WRITER_IDLE");
-		// idleMsg = "WRITER_IDLE" + time
-		// + System.getProperty("line.separator");
-		// byte[] b = idleMsg.getBytes();
-		// bf = Unpooled.buffer(b.length);
-		// ctx.writeAndFlush(bf);
-		// logger.debug("send:" +idleMsg);
-		// }
+		IdleStateEvent e = (IdleStateEvent) evt;
+		if (e.state() == IdleState.ALL_IDLE) {
+			String r = "心跳" + System.currentTimeMillis();
+			byte[] b = (r + System.getProperty("line.separator")).getBytes();
+			ByteBuf bf = Unpooled.buffer(b.length);
+			bf.writeBytes(b);
+			ctx.writeAndFlush(bf);
+			logger.debug("send:" + r);
+		} else if (e.state() == IdleState.READER_IDLE) {
+			String r = "心跳" + System.currentTimeMillis();
+			byte[] b = (r + System.getProperty("line.separator")).getBytes();
+			ByteBuf bf = Unpooled.buffer(b.length);
+			bf.writeBytes(b);
+			ctx.writeAndFlush(bf);
+			logger.debug("send:" + r);
+		} else if (e.state() == IdleState.WRITER_IDLE) {
+			String r = "心跳" + System.currentTimeMillis();
+			byte[] b = (r + System.getProperty("line.separator")).getBytes();
+			ByteBuf bf = Unpooled.buffer(b.length);
+			bf.writeBytes(b);
+			ctx.writeAndFlush(bf);
+			logger.debug("send:" + r);
+		}
 	}
 
 }
