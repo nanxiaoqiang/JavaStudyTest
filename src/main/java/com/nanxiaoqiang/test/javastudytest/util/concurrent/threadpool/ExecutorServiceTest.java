@@ -3,6 +3,7 @@ package com.nanxiaoqiang.test.javastudytest.util.concurrent.threadpool;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 多线程测试，输出0~9，但是输出的顺序应当是不同的。
@@ -37,6 +38,13 @@ public class ExecutorServiceTest {
 		// 线程池的关闭，如果不写线程池不会被关闭。
 		a.getExecutorService().shutdown();
 		System.out.println("End");
+		AtomicInteger i = new AtomicInteger(0);
+		i.getAndIncrement();
+		i.getAndIncrement();
+		i.getAndIncrement();
+		i.getAndIncrement();
+		i.getAndIncrement();
+		System.out.println("i:"+i);
 	}
 
 	public ExecutorService getExecutorService() {
