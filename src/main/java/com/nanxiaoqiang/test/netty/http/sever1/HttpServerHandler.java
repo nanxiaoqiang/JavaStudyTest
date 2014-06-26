@@ -25,8 +25,11 @@ public class HttpServerHandler extends ChannelHandlerAdapter {
 	private static Logger logger = LogManager.getLogger(HttpServerHandler.class
 			.getName());
 
-	private static final byte[] CONTENT = { 'H', 'e', 'l', 'l', 'o', ',', 'W',
-			'o', 'r', 'l', 'd', '!' };
+	// private static final byte[] CONTENT = { 'H', 'e', 'l', 'l', 'o', ',',
+	// 'W',
+	// 'o', 'r', 'l', 'd', '!' };
+
+	private static final String webhtml = "<html><head><meta http-equiv=Content-Type content=\"text/html;charset=utf-8\"><title>NettyHelloWorld主页</title></head><body><h1>Hello&nbsp;Netty&nbsp;HTTP&nbsp;Server!</h1><a href=\"http://www.baidu.com/\" target=\"_blank\">中文测试，点我跳到百度</a></body></html>";
 
 	@Override
 	public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
@@ -44,16 +47,19 @@ public class HttpServerHandler extends ChannelHandlerAdapter {
 			throws Exception {
 		if (msg instanceof HttpRequest) {
 			HttpRequest req = (HttpRequest) msg;
-			// if(io.netty.handler.codec.http.HttpHeaderUtil)
+			// if (HttpHeaderUtil.is100ContinueExpected(req)) {
+			// 在最新的snapshot的Netty例子中有了个HttpHeaderUtil类，
+			// 这样只要是协议中有header的都可以用这个提前做处理。
+			// 不过5.0.0Alpha1没有这个类。
 			if (is100ContinueExpected(req)) {
 				ctx.write(new DefaultHttpResponse(HTTP_1_1, CONTINUE));
 			}
 			boolean isKeepAlive = isKeepAlive(req);
 
 			FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1,
-					OK, Unpooled.wrappedBuffer(CONTENT));
+					OK, Unpooled.wrappedBuffer(webhtml.getBytes()));
 
-			response.headers().set(CONTENT_TYPE, "text/plain");
+			response.headers().set(CONTENT_TYPE, "text/html");
 			response.headers().set(CONTENT_LENGTH,
 					response.content().readableBytes());
 
