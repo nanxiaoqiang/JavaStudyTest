@@ -89,13 +89,14 @@ class QueryThread implements Runnable {
 			QueryRunner runner = new QueryRunner(dt);
 			try {
 				logger.info("开始执行" + Thread.currentThread().getName());
+				int sleep = RandomUtils.nextInt(1, 5);
+				TimeUnit.SECONDS.sleep(sleep);
 				@SuppressWarnings({ "rawtypes", "unchecked" })
 				Object value = runner.query(
 						"select count(*) from bjmetro_l7_iscs_dic_v",
 						new ScalarHandler());
-				TimeUnit.SECONDS.sleep(RandomUtils.nextInt(1, 5));
-				logger.info(Thread.currentThread().getName() + ":"
-						+ value.getClass().getName() + "|" + value);
+				logger.info(Thread.currentThread().getName() + ":" + sleep
+						+ ":" + value.getClass().getName() + "|" + value);
 				break;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
