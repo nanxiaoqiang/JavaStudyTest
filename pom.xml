@@ -125,6 +125,13 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- MySQL jdbc driver -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.jdbc.driver.version}</version>
+		</dependency>
+
 		<!-- Apache Thrift -->
 		<dependency>
 			<groupId>org.apache.thrift</groupId>
