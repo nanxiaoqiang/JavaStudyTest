@@ -31,6 +31,14 @@ public class ArrayListTest {
 		}
 		System.out.println(objs.toArray().getClass());
 
+		// 此句话会报异常， java.lang.ClassCastException
+		// 虽然实际上每个Object[] 中的Object又是一个Object[].
+		// System.out.println(((Object[][]) (objs.toArray())).length);
+		for (Object obj : objs) {
+			Object[] o = (Object[]) obj;
+			System.out.println(o.length);
+		}
+
 	}
 
 }
