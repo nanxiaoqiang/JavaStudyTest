@@ -34,6 +34,7 @@
 		<thrift.version>0.9.1</thrift.version>
 		<storm.version>0.9.1-incubating</storm.version>
 		<jackson.version>2.4.1</jackson.version>
+		<mybatis.version>3.2.7</mybatis.version>
 	</properties>
 
 	<dependencies>
@@ -131,6 +132,13 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql.jdbc.driver.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>${mybatis.version}</version>
+		</dependency>
+
 
 		<!-- Apache Thrift -->
 		<dependency>
