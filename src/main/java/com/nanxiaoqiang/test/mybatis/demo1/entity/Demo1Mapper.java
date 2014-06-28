@@ -1,9 +1,10 @@
 package com.nanxiaoqiang.test.mybatis.demo1.entity;
 
-public class Demo1Mapper {
+import org.apache.ibatis.annotations.Select;
 
-	public Demo1Mapper() {
-		// TODO Auto-generated constructor stub
-	}
+public interface Demo1Mapper {
+
+	@Select("SELECT id, stationname, system, final_point_description FROM bjmetro_l7_iscs_dic_v WHERE id = #{id}")
+	Demo1 selectDemo1(long id);
 
 }
