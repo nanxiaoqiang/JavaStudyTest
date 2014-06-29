@@ -131,8 +131,8 @@ public class GetRegisterSpout extends BaseRichSpout {
 		logger.debug("nextTulp");
 		// 在这里用初始化的MQ程序去读取寄存器信息，得到String[]的数据和correlation ID
 		// 下边的两个变量可以放到外边。
-		String[] readData;
-		String correlationId;
+		// String[] readData;
+		// String correlationId;
 		// 方案2:
 		// 用初始化MQ程序去读取寄存器信息，并得到update变量和correlation ID。
 		// 返回一个StormMqObject对象。
