@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 public class ActiveMqPoolConnTest {
 	private static Logger logger = LogManager
 			.getLogger(ActiveMqPoolConnTest.class.getName());
+	
 	private static JMSConsumer consumer = new JMSConsumer();
 
 	public static void main(String[] args) throws Exception {

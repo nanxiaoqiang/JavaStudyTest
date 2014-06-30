@@ -182,8 +182,8 @@ public class ActiveMqPoolConnTest2 {// implements MessageListener,
 			 * values are Session.AUTO_ACKNOWLEDGE, Session.CLIENT_ACKNOWLEDGE,
 			 * and Session.DUPS_OK_ACKNOWLEDGE.
 			 */
-			// false 参数表示 为非事务型消息，后面的参数表示消息的确认类型
-			session = connection.createSession(Boolean.FALSE,
+			// true 参数表示 为事务型消息，后面的参数表示消息的确认类型
+			session = connection.createSession(Boolean.TRUE,
 					Session.AUTO_ACKNOWLEDGE);
 			// Destination is superinterface of Queue
 			// PTP消息方式
@@ -198,6 +198,7 @@ public class ActiveMqPoolConnTest2 {// implements MessageListener,
 			Message message = getMessage(session, obj);
 			if (message != null) {
 				producer.send(message);
+				session.commit();
 				logger.info("send success!!");
 			}
 			rt = true;

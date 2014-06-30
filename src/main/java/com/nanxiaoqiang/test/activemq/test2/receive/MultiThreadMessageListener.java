@@ -5,7 +5,12 @@ import java.util.concurrent.ExecutorService;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class MultiThreadMessageListener implements MessageListener {
+	private static Logger logger = LogManager
+			.getLogger(MultiThreadMessageListener.class.getName());
 
 	// 默认线程池数量
 	public final static int DEFAULT_HANDLE_THREAD_POOL = 10;
@@ -34,6 +39,8 @@ public class MultiThreadMessageListener implements MessageListener {
 	 */
 	@Override
 	public void onMessage(final Message message) {
+		logger.info("onMessage:" + message != null ? message.getClass()
+				.getName() : "null");
 		// 使用支持阻塞的固定大小的线程池来执行操作
 		this.handleThreadPool.execute(new Runnable() {
 			public void run() {

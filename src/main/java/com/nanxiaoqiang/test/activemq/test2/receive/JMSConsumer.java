@@ -13,12 +13,23 @@ import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.ActiveMQPrefetchPolicy;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+/**
+ * 读取的实现
+ * 
+ * @author nanxiaoqiang
+ * 
+ * @version 2014年7月1日
+ */
 public class JMSConsumer implements ExceptionListener {
+	private static Logger logger = LogManager.getLogger(JMSConsumer.class
+			.getName());
 
+	public final static int DEFAULT_QUEUE_PREFETCH = 10;
 	// 队列预取策略
 	private int queuePrefetch = DEFAULT_QUEUE_PREFETCH;
-	public final static int DEFAULT_QUEUE_PREFETCH = 10;
 
 	private String brokerUrl;
 
@@ -40,6 +51,7 @@ public class JMSConsumer implements ExceptionListener {
 	 * @throws Exception
 	 */
 	public void start() throws Exception {
+		logger.info("start");
 		// ActiveMQ的连接工厂
 		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
 				StringUtils.isBlank(this.userName) ? ActiveMQConnection.DEFAULT_USER
@@ -53,8 +65,8 @@ public class JMSConsumer implements ExceptionListener {
 		((ActiveMQConnection) connection).setPrefetchPolicy(prefetchPolicy);
 		connection.setExceptionListener(this);
 		connection.start();
-		// 会话采用非事务级别，消息到达机制使用自动通知机制
-		session = connection.createSession(Boolean.FALSE,
+		// 会话采用事务级别，消息到达机制使用自动通知机制
+		session = connection.createSession(Boolean.TRUE,
 				Session.AUTO_ACKNOWLEDGE);
 		Destination destination = session.createQueue(this.queue);
 		MessageConsumer consumer = session.createConsumer(destination);
@@ -65,6 +77,7 @@ public class JMSConsumer implements ExceptionListener {
 	 * 关闭连接
 	 */
 	public void shutdown() {
+		logger.info("shutdown");
 		try {
 			if (session != null) {
 				session.close();
@@ -81,6 +94,7 @@ public class JMSConsumer implements ExceptionListener {
 
 	@Override
 	public void onException(JMSException e) {
+		logger.error("onException" + e.getMessage());
 		e.printStackTrace();
 	}
 
