@@ -51,6 +51,11 @@
 			<artifactId>activemq-broker</artifactId>
 			<version>${activemq.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-pool</artifactId>
+			<version>${activemq.version}</version>
+		</dependency>
 
 		<!-- Apache commons collections4 -->
 		<dependency>
