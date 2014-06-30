@@ -21,9 +21,11 @@ import javax.jms.TextMessage;
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.pool.PooledConnectionFactory;
+import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.joda.time.DateTime;
 
 /**
  * ActiveMQ Pool 测试，加报错重连等等。
@@ -267,8 +269,12 @@ public class ActiveMqPoolConnTest2 {// implements MessageListener,
 				"tcp://172.20.98.222:61616", null, null);
 		t.run();
 		t.send("L7_MCS_polling.queue", "曹大大今天没吃药感觉自己萌萌哒");
-		// TimeUnit.SECONDS.sleep(5);
-		t.send("L7_MCS_polling.queue", "caohongfeicaohongfeicaodada");
+		while (true) {
+			TimeUnit.SECONDS.sleep(RandomUtils.nextInt(1, 5));
+			t.send("L7_MCS_polling.queue", "曹大大今天没吃药感觉自己萌萌哒"
+					+ DateTime.now().toString("yyyy-MM-dd HH:mm:ss") + "|"
+					+ System.currentTimeMillis());
+		}
 		// t.shutdown();
 	}
 
