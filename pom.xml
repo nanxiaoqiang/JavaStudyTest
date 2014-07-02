@@ -18,7 +18,7 @@
 		<!-- Jar包的属性定义 -->
 		<joda-time.version>2.3</joda-time.version>
 		<activemq.version>5.10.0</activemq.version>
-		<mysql.jdbc.driver.version>5.1.30</mysql.jdbc.driver.version>
+		<mysql.jdbc.driver.version>5.1.31</mysql.jdbc.driver.version>
 		<oracle.jdbc.driver.version>11.2.0.1</oracle.jdbc.driver.version>
 		<commons-collections4.version>4.0</commons-collections4.version>
 		<commons-configuration.version>1.10</commons-configuration.version>
@@ -26,13 +26,13 @@
 		<commons-dbutils.version>1.5</commons-dbutils.version>
 		<commons-io.version>2.4</commons-io.version>
 		<commons-lang3.version>3.3.2</commons-lang3.version>
-		<log4j.version>2.0-rc1</log4j.version>
+		<log4j.version>2.0-rc2</log4j.version>
 		<guava.version>17.0</guava.version>
 		<mmca-main-commons.version>0.0.1-beta</mmca-main-commons.version>
 		<netty.version>5.0.0.Alpha1</netty.version>
 		<mina.version>2.0.7</mina.version>
 		<thrift.version>0.9.1</thrift.version>
-		<storm.version>0.9.1-incubating</storm.version>
+		<storm.version>0.9.2-incubating</storm.version>
 		<jackson.version>2.4.1</jackson.version>
 		<mybatis.version>3.2.7</mybatis.version>
 	</properties>
