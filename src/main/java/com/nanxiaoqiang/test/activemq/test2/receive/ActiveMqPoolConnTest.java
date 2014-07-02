@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 public class ActiveMqPoolConnTest {
 	private static Logger logger = LogManager
 			.getLogger(ActiveMqPoolConnTest.class.getName());
-	
+
 	private static JMSConsumer consumer = new JMSConsumer();
 
 	public static void main(String[] args) throws Exception {
@@ -22,12 +22,13 @@ public class ActiveMqPoolConnTest {
 				new MessageHandler() {
 					public void handle(Message message) {
 						try {
-							logger.info(((TextMessage) message).getText());
+							logger.info(((TextMessage) message).getText() + "|"
+									+ message.getJMSCorrelationID());
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
 					}
 				}));
-		consumer.start();
+		consumer.run();
 	}
 }
