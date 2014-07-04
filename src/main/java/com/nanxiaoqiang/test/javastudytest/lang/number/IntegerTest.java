@@ -32,6 +32,20 @@ public class IntegerTest {
 		System.out.println(num3.intValue() == num4);
 		System.out.println(num3.intValue() == num4.intValue());
 		System.out.println(num1 == num3);
+		System.out.println("******** 我是分隔符 **********");
+		int num01 = 32;
+		int num02 = 32;
+		Integer num03 = 32;
+		Integer num04 = 32;
+		Integer num05 = new Integer(32);
+		Integer num06 = new Integer(32);
+		System.out.println(num01 == num02);
+		System.out.println(num03 == num04);// 居然相等了！在[-128,127]之间的数字直接附值内存里就是数字！
+		System.out.println(num05 == num06);// 但是用new的方法附初始值。全部指向的是栈内存！
+		System.out.println(num01 == num03);
+		System.out.println(num01 == num05);
+		System.out.println(num03 == num05);
+		System.out.println(num03.intValue() == num05.intValue());
 	}
 
 }
