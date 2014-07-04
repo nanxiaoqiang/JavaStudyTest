@@ -22,8 +22,13 @@ public class IntegerTest {
 		int num2 = 128;
 		Integer num3 = 128;
 		Integer num4 = 128;
+		Integer num5 = new Integer(128);
+		Integer num6 = new Integer(128);
 		System.out.println(num1 == num2);
 		System.out.println(num3 == num4);// 注意！两个Integer的比较仍然是比较指针的内存值（栈）。所以会不一样！
+		System.out.println(num5 == num6);// 不论是new Integer(int)还是直接附值两个对象都不想等
+		System.out.println(num1 == num5);
+		System.out.println(num3 == num5);
 		System.out.println(num3.intValue() == num4);
 		System.out.println(num3.intValue() == num4.intValue());
 		System.out.println(num1 == num3);
