@@ -19,7 +19,7 @@ public class HelloJob implements Job {
 	@Override
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
 		logger.info("Say Hello World!!!"
-				+ DateTime.now().toString("yyyy-MM-dd hh:mm:ss"));
+				+ DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
 	}
 
 }

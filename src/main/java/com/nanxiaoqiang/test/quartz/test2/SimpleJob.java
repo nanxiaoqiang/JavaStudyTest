@@ -31,8 +31,8 @@ public class SimpleJob implements Job {
 			e.printStackTrace();
 		}
 		logger.info("Job:" + jobKey + " run at "
-				+ start.toString("yyyy-MM-dd hh:mm:ss") + " and output at "
-				+ DateTime.now().toString("yyyy-MM-dd hh:mm:ss"));
+				+ start.toString("yyyy-MM-dd HH:mm:ss") + " and output at "
+				+ DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
 	}
 
 }
