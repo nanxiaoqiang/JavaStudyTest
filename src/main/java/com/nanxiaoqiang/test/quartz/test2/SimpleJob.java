@@ -22,6 +22,7 @@ public class SimpleJob implements Job {
 	public void execute(JobExecutionContext context)
 			throws JobExecutionException {
 		JobKey jobKey = context.getJobDetail().getKey();
+		DateTime start = DateTime.now();
 		try {
 			// 手动加了个延时，用来测试耗时Job的Interval
 			TimeUnit.SECONDS.sleep(1);
@@ -29,7 +30,8 @@ public class SimpleJob implements Job {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		logger.info("Job:" + jobKey + " at "
+		logger.info("Job:" + jobKey + " run at "
+				+ start.toString("yyyy-MM-dd hh:mm:ss") + " and output at "
 				+ DateTime.now().toString("yyyy-MM-dd hh:mm:ss"));
 	}
 
