@@ -1,5 +1,7 @@
 package com.nanxiaoqiang.test.quartz.test2;
 
+import java.util.concurrent.TimeUnit;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joda.time.DateTime;
@@ -20,6 +22,13 @@ public class SimpleJob implements Job {
 	public void execute(JobExecutionContext context)
 			throws JobExecutionException {
 		JobKey jobKey = context.getJobDetail().getKey();
+		try {
+			// 手动加了个延时，用来测试耗时Job的Interval
+			TimeUnit.SECONDS.sleep(1);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		logger.info("Job:" + jobKey + " at "
 				+ DateTime.now().toString("yyyy-MM-dd hh:mm:ss"));
 	}

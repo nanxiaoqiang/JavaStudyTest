@@ -138,7 +138,6 @@ public class App {
 
 			logger.info("Jobs开始执行！");
 			scheduler.start();
-			
 			TimeUnit.MINUTES.sleep(5);
 			scheduler.shutdown(true);
 			SchedulerMetaData metaData = scheduler.getMetaData();
