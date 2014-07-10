@@ -60,7 +60,7 @@ public class ParamTest {
 
 			scheduler.shutdown(true);
 			SchedulerMetaData metaData = scheduler.getMetaData();
-			logger.info("执行Jobc次数：" + metaData.getNumberOfJobsExecuted());
+			logger.info("执行Job次数：" + metaData.getNumberOfJobsExecuted());
 			logger.info("最后的结果:color:" + color + "|count:" + count);
 		} catch (SchedulerException | InterruptedException e) {
 			// TODO Auto-generated catch block
