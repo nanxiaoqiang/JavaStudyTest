@@ -37,6 +37,11 @@ public class StringBuilderTest {
 		System.out.println(sb2.toString());
 
 		System.out.println(System.currentTimeMillis());
+		
+		// 删除不能-1，要用delete(0, sb.length())
+		sb2.delete(0, sb2.length()-1);
+		System.out.println(sb2.toString());
+		
 	}
 
 }
