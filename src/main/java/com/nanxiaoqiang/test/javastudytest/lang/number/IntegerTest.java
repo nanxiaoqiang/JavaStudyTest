@@ -46,6 +46,8 @@ public class IntegerTest {
 		System.out.println(num01 == num05);
 		System.out.println(num03 == num05);
 		System.out.println(num03.intValue() == num05.intValue());
+		System.out.println("***********");
+		System.out.println((int)0B11111111_11111111_11111111_11111111);
 	}
 
 }
