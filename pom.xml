@@ -16,8 +16,8 @@
 		<java.version>1.7</java.version>
 
 		<!-- Jar包的属性定义 -->
-		<junit.version>4.11</junit.version>
-		<joda-time.version>2.3</joda-time.version>
+		<junit.version>4.12</junit.version>
+		<joda-time.version>2.6</joda-time.version>
 		<activemq.version>5.10.0</activemq.version>
 		<mysql.jdbc.driver.version>5.1.33</mysql.jdbc.driver.version>
 		<oracle.jdbc.driver.version>11.2.0.1</oracle.jdbc.driver.version>
@@ -28,18 +28,27 @@
 		<commons-io.version>2.4</commons-io.version>
 		<commons-lang3.version>3.3.2</commons-lang3.version>
 		<commons-net.version>3.3</commons-net.version>
-		<log4j.version>2.0.2</log4j.version>
+		<log4j.version>2.1</log4j.version>
 		<guava.version>18.0</guava.version>
 		<mmca-main-commons.version>0.0.1-beta</mmca-main-commons.version>
 		<netty.version>5.0.0.Alpha1</netty.version>
 		<mina.version>2.0.7</mina.version>
-		<thrift.version>0.9.1</thrift.version>
-		<storm.version>0.9.2-incubating</storm.version>
-		<jackson.version>2.4.1</jackson.version>
-		<mybatis.version>3.2.7</mybatis.version>
+		<thrift.version>0.9.2</thrift.version>
+		<storm.version>0.9.3</storm.version>
+		<jackson.version>2.4.4</jackson.version>
+		<mybatis.version>3.2.8</mybatis.version>
 		<quartz.version>2.2.1</quartz.version>
 		<shiro.version>1.2.3</shiro.version>
+		<cglib.version>3.1</cglib.version>
 	</properties>
+
+	<!-- 如有Nexus私服, 取消注释并指向正确的服务器地址. <repositories> <repository> <id>nexus</id> 
+		<name>Team Nexus Repository</name> <url>http://localhost:8081/nexus/content/groups/public</url> 
+		</repository> </repositories> -->
+
+	<!-- 设定插件仓库, 如有Nexus私服, 取消注释并指向正确的服务器地址. <pluginRepositories> <pluginRepository> 
+		<id>nexus</id> <name>Team Nexus Repository</name> <url>http://localhost:8081/nexus/content/groups/public</url> 
+		<snapshots> <enabled>false</enabled> </snapshots> </pluginRepository> </pluginRepositories> -->
 
 	<dependencies>
 		<!-- Joda时间 -->
@@ -207,6 +216,14 @@
 			<artifactId>shiro-core</artifactId>
 			<version>${shiro.version}</version>
 		</dependency>
+
+		<!-- cglib -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>${cglib.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
