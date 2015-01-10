@@ -40,6 +40,7 @@
 		<quartz.version>2.2.1</quartz.version>
 		<shiro.version>1.2.3</shiro.version>
 		<cglib.version>3.1</cglib.version>
+		<rabbitma-client.version>3.4.3</rabbitma-client.version>
 	</properties>
 
 	<!-- 如有Nexus私服, 取消注释并指向正确的服务器地址. <repositories> <repository> <id>nexus</id> 
@@ -224,6 +225,12 @@
 			<version>${cglib.version}</version>
 		</dependency>
 
+		<!-- RabbitMq Client -->
+		<dependency>
+			<groupId>com.rabbitmq</groupId>
+			<artifactId>amqp-client</artifactId>
+			<version>${rabbitma-client.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
