@@ -22,7 +22,9 @@ public class MethodValTest {
 	 * @param str
 	 */
 	public void changStr(String str) {
+		System.out.println("before changStr:"+str);
 		str = "abc";
+		System.out.println("after changStr:"+str);
 	}
 
 	public static void main(String[] args) {
