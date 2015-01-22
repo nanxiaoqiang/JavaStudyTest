@@ -41,6 +41,7 @@
 		<shiro.version>1.2.3</shiro.version>
 		<cglib.version>3.1</cglib.version>
 		<rabbitma-client.version>3.4.3</rabbitma-client.version>
+		<xmemcached.version>2.0.0</xmemcached.version>
 	</properties>
 
 	<!-- 如有Nexus私服, 取消注释并指向正确的服务器地址. <repositories> <repository> <id>nexus</id> 
@@ -230,6 +231,13 @@
 			<groupId>com.rabbitmq</groupId>
 			<artifactId>amqp-client</artifactId>
 			<version>${rabbitma-client.version}</version>
+		</dependency>
+
+		<!-- xMemcached: a memcached client -->
+		<dependency>
+			<groupId>com.googlecode.xmemcached</groupId>
+			<artifactId>xmemcached</artifactId>
+			<version>${xmemcached.version}</version>
 		</dependency>
 	</dependencies>
 
