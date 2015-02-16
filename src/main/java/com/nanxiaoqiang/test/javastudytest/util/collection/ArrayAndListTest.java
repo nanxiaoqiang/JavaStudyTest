@@ -53,8 +53,10 @@ public class ArrayAndListTest {
 		int[] datas1 = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
 		// 如果是基本类型int、double...int[]是一个类型
 		// 在List中的E[] a会变成int[]类型
+		@SuppressWarnings("rawtypes")
 		List tt1 = Arrays.asList(datas1);
 		// 必须经过Apache commons lang3的ArrayUtils的toObject处理一下换成Integer[]才行
+		@SuppressWarnings("rawtypes")
 		List tt2 = Arrays.asList(ArrayUtils.toObject(datas1));
 		System.out.println(tt1.size() + "|" + tt2.size());
 		System.out.println(tt1.get(0).getClass().getName());// [I 就是数组
