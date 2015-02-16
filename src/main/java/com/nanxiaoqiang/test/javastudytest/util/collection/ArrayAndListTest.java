@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang.math.RandomUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.storm.guava.collect.Lists;
 
 /**
@@ -43,8 +44,21 @@ public class ArrayAndListTest {
 		int_list2 = Arrays.asList(s);
 		long end2 = System.currentTimeMillis();
 		System.out.println("time:" + (end2 - start2));
-		
+
 		// 同理，List转Array
 		Integer[] xx = int_list.toArray(new Integer[10000]);
+
+		System.out.println("***************************");
+
+		int[] datas1 = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
+		// 如果是基本类型int、double...int[]是一个类型
+		// 在List中的E[] a会变成int[]类型
+		List tt1 = Arrays.asList(datas1);
+		// 必须经过Apache commons lang3的ArrayUtils的toObject处理一下换成Integer[]才行
+		List tt2 = Arrays.asList(ArrayUtils.toObject(datas1));
+		System.out.println(tt1.size() + "|" + tt2.size());
+		System.out.println(tt1.get(0).getClass().getName());// [I 就是数组
+		System.out.println(tt2.get(0).getClass().getName());// java.lang.Integer
+
 	}
 }
