@@ -1,5 +1,6 @@
 package com.nanxiaoqiang.test.javastudytest.util.collection;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -62,5 +63,20 @@ public class ArrayAndListTest {
 		System.out.println(tt1.get(0).getClass().getName());// [I 就是数组
 		System.out.println(tt2.get(0).getClass().getName());// java.lang.Integer
 
+		try {
+			// 用asList生成的是一个List不是ArrayList，所以tt1是不可变的。一旦使用add会报错！
+			tt1.add(123);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+
+		// 正确方法
+		ArrayList<Integer> tt3 = new ArrayList<>(Arrays.asList(ArrayUtils
+				.toObject(datas1)));
+		
+		// 这个时候add就没问题了
+		tt3.add(123);
+		System.out.println(tt3.toString());
 	}
 }
