@@ -20,7 +20,7 @@ public class ArrayAndListTest {
 	public ArrayAndListTest() {
 	}
 
-	@SuppressWarnings("unused")
+	@SuppressWarnings({ "unused", "unchecked" })
 	public static void main(String[] args) {
 		Integer[] s;
 		int i;
@@ -65,8 +65,9 @@ public class ArrayAndListTest {
 
 		try {
 			// 用asList生成的是一个List不是ArrayList，所以tt1是不可变的。一旦使用add会报错！
-			tt1.add(123);
+			tt2.add(123);
 		} catch (Exception e) {
+			// java.lang.UnsupportedOperationException
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
