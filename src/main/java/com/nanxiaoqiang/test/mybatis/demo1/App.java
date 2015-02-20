@@ -31,7 +31,7 @@ public class App {
 	}
 
 	public static void main(String[] args) {
-		String resource = "mybatis/mybatis-config.xml";
+		String resource = "mybatis/demo1/mybatis-config.xml";
 		InputStream inputStream = null;
 		try {
 			inputStream = Resources.getResourceAsStream(resource);
