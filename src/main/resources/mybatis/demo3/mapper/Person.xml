@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.nanxiaoqiang.test.mybatis.demo3.mapper.MyBatisStudyPersonMapper">
+	<resultMap type="MyBatisStudyPerson" id="PersonResult">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="sex" column="sex" />
+		<result property="tel" column="tel" />
+		<result property="phone" column="phone" />
+		<result property="address" column="address" />
+		<result property="info" column="infomation" />
+	</resultMap>
+
+	<select id="selectAllPersons" resultMap="PersonResult">
+		select * from mybatis_demo1_person
+		<where>
+			<if test="name != null">
+				name LIKE #{name}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectPersonsById" parameterType="int"
+		resultType="MyBatisStudyPerson">
+		select id, name, sex, tel, phone, address, infomation as
+		Info
+		from
+		mybatis_demo1_person
+		where id
+		= #{id}
+	</select>
+
+	<insert id="insertPerson" parameterType="MyBatisStudyPerson">
+		INSERT INTO
+		mybatis_demo1_person(name, sex, tel, phone,
+		address, infomation)
+		VALUES(#{name}, #{sex}, #{tel}, #{phone},
+		#{address}, #{info})
+	</insert>
+
+	<update id="updatePerson" parameterType="MyBatisStudyPerson">
+		UPDATE
+		mybatis_demo1_person <!-- SET name=#{name}, sex=#{sex}, tel=#{tel}, 
+			phone=#{phone}, address=#{address}, infomation=#{info} -->
+		<set>
+			<if test="name != null">name=#{name},</if>
+			<if test="sex != null">sex=#{sex},</if>
+			<if test="tel != null">tel=#{tel},</if>
+			<if test="phone != null">phone=#{phone},</if>
+			<if test="address != null">address=#{address},</if>
+			<if test="info != null">infomation=#{info},</if>
+		</set>
+		WHERE
+		id=#{id}
+	</update>
+</mapper>
