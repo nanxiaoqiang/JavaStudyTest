@@ -5,6 +5,10 @@
 <configuration>
 	<properties resource="mybatis/demo2/application.properties" />
 
+	<settings>
+		<setting name="logImpl" value="LOG4J2" />
+	</settings>
+
 	<typeAliases>
 		<package name="com.nanxiaoqiang.test.mybatis.demo2.entity" />
 	</typeAliases>
