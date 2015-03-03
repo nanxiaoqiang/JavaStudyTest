@@ -28,6 +28,8 @@ public class App {
 			logger.error(e.getMessage());
 		}
 		sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+		// .build(inputStream, "development");
+		// 这里填写的是配置文件mybatis-config.xml的environment的id，可用于多数据源
 	}
 
 	public App() {
