@@ -6,6 +6,8 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,6 +28,7 @@ public class NettyHttpServer {
 		try {
 			b.option(ChannelOption.SO_BACKLOG, 1024).group(boss, worker)
 					.channel(NioServerSocketChannel.class)
+					.handler(new LoggingHandler(LogLevel.INFO))
 					.childHandler(new HttpServerInitializer());
 			Channel ch = b.bind(port).sync().channel();
 			logger.info("Http服务器启动！！http://localhost:" + port);
