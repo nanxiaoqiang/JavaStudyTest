@@ -42,6 +42,7 @@
 		<cglib.version>3.1</cglib.version>
 		<rabbitma-client.version>3.5.0</rabbitma-client.version>
 		<xmemcached.version>2.0.0</xmemcached.version>
+		<spring.version>4.1.5.RELEASE</spring.version>
 	</properties>
 
 	<!-- 如有Nexus私服, 取消注释并指向正确的服务器地址. -->
@@ -251,6 +252,26 @@
 			<groupId>com.googlecode.xmemcached</groupId>
 			<artifactId>xmemcached</artifactId>
 			<version>${xmemcached.version}</version>
+		</dependency>
+
+		<!-- Spring的相关 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+			<!--排除commons-logging依赖 -->
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 	</dependencies>
 
