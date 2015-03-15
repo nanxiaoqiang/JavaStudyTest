@@ -43,6 +43,7 @@
 		<rabbitma-client.version>3.5.0</rabbitma-client.version>
 		<xmemcached.version>2.0.0</xmemcached.version>
 		<spring.version>4.1.5.RELEASE</spring.version>
+		<aspectj.version>1.8.5</aspectj.version>
 	</properties>
 
 	<!-- 如有Nexus私服, 取消注释并指向正确的服务器地址. -->
@@ -272,6 +273,17 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectj.version}</version>
 		</dependency>
 	</dependencies>
 
