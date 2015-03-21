@@ -11,7 +11,7 @@ import org.apache.thrift.TException;
 import com.nanxiaoqiang.test.thrift.demo1.HelloworldService.Iface;
 
 /**
- * 服务
+ * Handler 数据处理接口
  * 
  * @author nanxiaoqiang
  * 

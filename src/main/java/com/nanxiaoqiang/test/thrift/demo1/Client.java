@@ -25,6 +25,15 @@ public class Client {
 	}
 
 	public void startclient() {
+		// 支持的通信方式(数据传输方式)（Transport）
+		// TFileTransport：文件（日志）传输类，允许client将文件传给server，允许server将收到的数据写到文件中。
+		// THttpTransport：采用Http传输协议进行数据传输
+		// TSocket：采用TCP Socket进行数据传输
+		// TZlibTransport：压缩后对数据进行传输，或者将收到的数据解压
+		// 下面几个类主要是对上面几个类地装饰（采用了装饰模式），以提高传输效率。
+		// TBufferedTransport：对某个Transport对象操作的数据进行buffer，即从buffer中读取数据进行传输，或者将数据直接写入buffer
+		// TFramedTransport：以frame为单位进行传输，非阻塞式服务中使用。同TBufferedTransport类似，也会对相关数据进行buffer，同时，它支持定长数据发送和接收。
+		// TMemoryBuffer：从一个缓冲区中读写数据
 		TTransport transport = new TSocket(SERVER_IP, SERVER_PORT, TIMEOUT);
 		// 协议要和服务端一致
 		TProtocol protocol = new TBinaryProtocol(transport);
