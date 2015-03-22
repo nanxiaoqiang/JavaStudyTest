@@ -98,7 +98,10 @@ public class Client implements Runnable {
 		new Thread(c1, "测试A").start();
 		new Thread(c1, "测试B").start();
 		new Thread(c1, "测试C").start();
-
+		// 上边的代码为一个后果是报错报错报错啊啊啊啊啊！
+		// TNonblockingServer采用NIO的模式, 借助Channel/Selector机制, 采用IO事件模型来处理.
+		// 源代码中select代码里对accept/read/write等IO事件进行监控和处理,
+		// 唯一可惜的这个单线程处理. 当遇到handler里有阻塞的操作时, 会导致整个服务被阻塞住.
 	}
 
 	@Override
