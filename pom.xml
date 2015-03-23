@@ -13,7 +13,7 @@
 	<properties>
 		<!-- Plugin的属性定义 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.7</java.version>
+		<java.version>1.8</java.version>
 
 		<!-- Jar包的属性定义 -->
 		<junit.version>4.12</junit.version>
@@ -46,16 +46,16 @@
 		<aspectj.version>1.8.5</aspectj.version>
 	</properties>
 
-	<!-- 如有Nexus私服, 取消注释并指向正确的服务器地址. -->
+	<!-- 如有Nexus私服, 取消注释并指向正确的服务器地址. 
 	<repositories>
 		<repository>
 			<id>nexus</id>
 			<name>Team Nexus Repository</name>
 			<url>http://localhost:8081/nexus/content/groups/public</url>
 		</repository>
-	</repositories>
+	</repositories>-->
 
-	<!-- 设定插件仓库, 如有Nexus私服, 取消注释并指向正确的服务器地址. -->
+	<!-- 设定插件仓库, 如有Nexus私服, 取消注释并指向正确的服务器地址. 
 	<pluginRepositories>
 		<pluginRepository>
 			<id>nexus</id>
@@ -65,7 +65,7 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</pluginRepository>
-	</pluginRepositories>
+	</pluginRepositories>-->
 
 	<dependencies>
 		<!-- Joda时间 -->
