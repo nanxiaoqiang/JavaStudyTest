@@ -8,10 +8,19 @@ public class HelloWorld {
 	}
 
 	public static void main(String[] args) {
+		String key = "key.localhost.test1.helloworld";
 		Jedis jedis = new Jedis("localhost");
-		jedis.set("key.localhost.test1.helloworld", "Hello World!");
-		String value = jedis.get("key.localhost.test1.helloworld");
+		jedis.set(key, "Hello World!");
+		String value = jedis.get(key);
 		System.out.println(value);
+		String str = jedis.select(1);// 切换到db1簇(第二个)
+		System.out.println(str);// OK表示切换成功
+		System.out.println(jedis.get(key));// 此时再输出key就找不到了啊！null
+		jedis.set(key, "Hello World! in db1");
+		System.out.println(jedis.get(key));// 此时输出的是db1的key
+		System.out.println(jedis.del(key));// 删除成功返回1
+		System.out.println(jedis.select(0));// 此时再选择db0
+		System.out.println(jedis.get(key));// 此时输出的是db0的key的值
 		jedis.disconnect();
 		jedis.close();
 	}
