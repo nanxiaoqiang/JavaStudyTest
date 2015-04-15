@@ -25,11 +25,18 @@ public class ClassTest {
 			c3 = Class
 					.forName("com.nanxiaoqiang.test.javastudytest.lang.base.reflect.demo1.ClassTest");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("c1 == c2:" + (c1 == c2));
 		System.out.println("c1 == c3:" + (c1 == c3));
 		System.out.println("c3 == c2:" + (c3 == c2));
+		System.out.println("***********************");
+		try {
+			Class<?> c4 = Class.forName(null);// 会报错！java.lang.NullPointerException
+			System.out.println(c4.getName());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
 	}
 }
