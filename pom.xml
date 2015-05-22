@@ -45,18 +45,19 @@
 		<spring.version>4.1.5.RELEASE</spring.version>
 		<aspectj.version>1.8.5</aspectj.version>
 		<jredis.version>2.7.0</jredis.version>
+		<jboss-marshalling.version>1.4.10.Final</jboss-marshalling.version>
 	</properties>
 
-	<!-- 如有Nexus私服, 取消注释并指向正确的服务器地址. 
+	<!-- 如有Nexus私服, 取消注释并指向正确的服务器地址. -->
 	<repositories>
 		<repository>
 			<id>nexus</id>
 			<name>Team Nexus Repository</name>
 			<url>http://localhost:8081/nexus/content/groups/public</url>
 		</repository>
-	</repositories>-->
+	</repositories>
 
-	<!-- 设定插件仓库, 如有Nexus私服, 取消注释并指向正确的服务器地址. 
+	<!-- 设定插件仓库, 如有Nexus私服, 取消注释并指向正确的服务器地址. -->
 	<pluginRepositories>
 		<pluginRepository>
 			<id>nexus</id>
@@ -66,7 +67,7 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</pluginRepository>
-	</pluginRepositories>-->
+	</pluginRepositories>
 
 	<dependencies>
 		<!-- Joda时间 -->
@@ -287,11 +288,25 @@
 			<version>${aspectj.version}</version>
 		</dependency>
 		
+		<!-- JEDIS -->
 		<dependency>
     		<groupId>redis.clients</groupId>
     		<artifactId>jedis</artifactId>
     		<version>${jredis.version}</version>
 		</dependency>
+		
+		<!-- 序列化 -->
+		<dependency>
+			<groupId>org.jboss.marshalling</groupId>
+			<artifactId>jboss-marshalling</artifactId>
+			<version>${jboss-marshalling.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.marshalling</groupId>
+			<artifactId>jboss-marshalling-serial</artifactId>
+			<version>${jboss-marshalling.version}</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
