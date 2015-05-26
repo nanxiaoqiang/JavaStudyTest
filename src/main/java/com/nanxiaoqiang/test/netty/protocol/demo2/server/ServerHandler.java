@@ -1,4 +1,4 @@
-package com.nanxiaoqiang.test.netty.protocol.demo2.client;
+package com.nanxiaoqiang.test.netty.protocol.demo2.server;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -40,6 +40,7 @@ public class ServerHandler extends LengthFieldBasedFrameDecoder {
 		if (frame == null) {
 			return null;// 空的就不管了
 		}
+		
 
 		return null;//super.decode(ctx, in);
 	}
