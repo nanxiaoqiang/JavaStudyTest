@@ -25,6 +25,10 @@ public class Header implements Serializable {
 
 	private short msgId; // msg_id 12~13
 
+	public Header() {
+		super();
+	}
+
 	public Header(byte systemId, short length, byte multiFlag,
 			short messageLength, int time, short version, short msgId) {
 		super();

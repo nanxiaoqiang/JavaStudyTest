@@ -13,6 +13,9 @@ import io.netty.handler.logging.LoggingHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.nanxiaoqiang.test.netty.protocol.demo2.codec.NxqDecoder;
+import com.nanxiaoqiang.test.netty.protocol.demo2.codec.NxqEncoder;
+
 public class Server {
 
 	private static Logger LOGGER = LogManager.getLogger(Server.class.getName());
@@ -26,6 +29,10 @@ public class Server {
 	}
 
 	public static void main(String[] args) throws Exception {
+		new Server().startup();
+	}
+
+	protected void startup() throws Exception {
 		EventLoopGroup bossGroup = new NioEventLoopGroup(1);
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
 
@@ -39,12 +46,14 @@ public class Server {
 						protected void initChannel(SocketChannel ch)
 								throws Exception {
 							ch.pipeline().addLast(
-									new ServerHandler(1024 * 1024, 1, 3));
+									new NxqDecoder(1024 * 1024, 5, 3, 10));
+							ch.pipeline().addLast("MessageEncoder",
+									new NxqEncoder());
 						}
 					});
 
 			// Bind and start to accept incoming connections.
-			ChannelFuture cf = b.bind(PORT);
+			cf = b.bind(PORT);
 			LOGGER.info("NettyServer启动成功:" + PORT);
 			cf.channel().closeFuture().sync();
 		} finally {

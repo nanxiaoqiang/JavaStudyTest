@@ -1,0 +1,50 @@
+package com.nanxiaoqiang.test.netty.protocol.demo2;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import com.nanxiaoqiang.test.netty.protocol.demo2.client.Client;
+import com.nanxiaoqiang.test.netty.protocol.demo2.client.NettyServerInit;
+import com.nanxiaoqiang.test.netty.protocol.demo2.msg.BaseMessage;
+import com.nanxiaoqiang.test.netty.protocol.demo2.msg.Header;
+
+public class Test {
+	public static Client server;
+
+	public static void main(String[] args) {
+		ExecutorService executorService;
+		executorService = Executors.newFixedThreadPool(Runtime.getRuntime()
+				.availableProcessors() * 10, new ThreadFactory() {
+			private AtomicInteger i = new AtomicInteger(0);
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see java.util.concurrent.ThreadFactory#newThread(java.lang
+			 * .Runnable)
+			 */
+			@Override
+			public Thread newThread(Runnable r) {
+				// 线程命名
+				return new Thread(r, "Thread_AlarmServer_Executor_"
+						+ this.i.incrementAndGet());
+			}
+		});
+		NettyServerInit nettyThread = new NettyServerInit();
+		executorService.execute(nettyThread);
+		try {
+			TimeUnit.SECONDS.sleep(5);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("lalala");
+		BaseMessage msg = new BaseMessage();
+		Header h = new Header((short) 0, (short) 0, (short) 0x03);
+		msg.setHeader(h);
+		Client.client.getCf().channel().writeAndFlush(msg);
+	}
+}

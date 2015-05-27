@@ -1,4 +1,4 @@
-package com.nanxiaoqiang.test.netty.protocol.demo2.server;
+package com.nanxiaoqiang.test.netty.protocol.demo2.codec;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -9,9 +9,12 @@ import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class ServerHandler extends LengthFieldBasedFrameDecoder {
+import com.nanxiaoqiang.test.netty.protocol.demo2.msg.BaseMessage;
+import com.nanxiaoqiang.test.netty.protocol.demo2.msg.Header;
 
-	private static Logger LOGGER = LogManager.getLogger(ServerHandler.class
+public class NxqDecoder extends LengthFieldBasedFrameDecoder {
+
+	private static Logger LOGGER = LogManager.getLogger(NxqDecoder.class
 			.getName());
 
 	/**
@@ -24,9 +27,10 @@ public class ServerHandler extends LengthFieldBasedFrameDecoder {
 	 *            4 长度属性的长度，即存放数据包长度的变量的的字节所占的长度
 	 * @throws IOException
 	 */
-	public ServerHandler(int maxFrameLength, int lengthFieldOffset,
-			int lengthFieldLength) throws IOException {
-		super(maxFrameLength, lengthFieldOffset, lengthFieldLength);
+	public NxqDecoder(int maxFrameLength, int lengthFieldOffset,
+			int lengthFieldLength, int lengthAdjustment) throws IOException {
+		super(maxFrameLength, lengthFieldOffset, lengthFieldLength,
+				lengthAdjustment, 0);
 		LOGGER.debug(new StringBuffer("ServerHandler Constructor|:")
 				.append(maxFrameLength).append("|lengthFieldOffset:")
 				.append(lengthFieldOffset).append("|lengthFieldLength:")
@@ -40,9 +44,24 @@ public class ServerHandler extends LengthFieldBasedFrameDecoder {
 		if (frame == null) {
 			return null;// 空的就不管了
 		}
-		
 
-		return null;//super.decode(ctx, in);
+		BaseMessage bmsg = new BaseMessage();
+		// Head组装
+		Header header = new Header();
+		header.setSystemId(frame.readByte());
+		header.setLength(frame.readShort());
+		header.setMultiFlag(frame.readByte());
+		header.setMessageLength(frame.readShort());
+		header.setTime(frame.readInt());
+		header.setVersion(frame.readShort());
+		header.setMsgId(frame.readShort());
+
+		// bmsg.setData(frame);
+		bmsg.setHeader(header);
+
+		LOGGER.info(header);
+
+		return null;// super.decode(ctx, in);
 	}
 
 }
