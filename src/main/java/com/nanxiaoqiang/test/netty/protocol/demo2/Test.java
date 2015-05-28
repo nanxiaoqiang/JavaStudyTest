@@ -6,6 +6,9 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.nanxiaoqiang.test.netty.protocol.demo2.client.Client;
 import com.nanxiaoqiang.test.netty.protocol.demo2.client.NettyServerInit;
 import com.nanxiaoqiang.test.netty.protocol.demo2.msg.BaseMessage;
@@ -13,6 +16,8 @@ import com.nanxiaoqiang.test.netty.protocol.demo2.msg.Header;
 
 public class Test {
 	public static Client server;
+
+	private static Logger LOGGER = LogManager.getLogger(Test.class.getName());
 
 	public static void main(String[] args) {
 		ExecutorService executorService;
@@ -45,6 +50,7 @@ public class Test {
 		BaseMessage msg = new BaseMessage();
 		Header h = new Header((short) 0, (short) 0, (short) 0x03);
 		msg.setHeader(h);
+		LOGGER.debug(msg);
 		Client.client.getCf().channel().writeAndFlush(msg);
 	}
 }

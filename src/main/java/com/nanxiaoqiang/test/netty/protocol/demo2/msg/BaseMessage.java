@@ -2,6 +2,9 @@ package com.nanxiaoqiang.test.netty.protocol.demo2.msg;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 public class BaseMessage implements Serializable {
 
 	/**
@@ -38,4 +41,9 @@ public class BaseMessage implements Serializable {
 		this.data = data;
 	}
 
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this,
+				ToStringStyle.JSON_STYLE);
+	}
 }

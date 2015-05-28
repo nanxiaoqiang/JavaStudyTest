@@ -2,6 +2,9 @@ package com.nanxiaoqiang.test.netty.protocol.demo2.msg;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import com.nanxiaoqiang.test.netty.protocol.demo2.Constants;
 
 public class Header implements Serializable {
@@ -154,5 +157,11 @@ public class Header implements Serializable {
 		// System.out.println(ii);
 		// byte iii = (byte) 0x29;
 		// System.out.println(iii);
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this,
+				ToStringStyle.JSON_STYLE);
 	}
 }

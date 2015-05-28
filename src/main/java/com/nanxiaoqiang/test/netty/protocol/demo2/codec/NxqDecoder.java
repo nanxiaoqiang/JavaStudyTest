@@ -28,19 +28,34 @@ public class NxqDecoder extends LengthFieldBasedFrameDecoder {
 	 * @throws IOException
 	 */
 	public NxqDecoder(int maxFrameLength, int lengthFieldOffset,
+			int lengthFieldLength, int lengthAdjustment, int initialBytesToStrip)
+			throws IOException {
+		super(maxFrameLength, lengthFieldOffset, lengthFieldLength,
+				lengthAdjustment, initialBytesToStrip);
+		LOGGER.debug(new StringBuffer("ServerHandler Constructor|:")
+				.append(maxFrameLength).append("|lengthFieldOffset:")
+				.append(lengthFieldOffset).append("|lengthFieldLength:")
+				.append(lengthFieldLength).append("|lengthAdjustment:")
+				.append(lengthAdjustment).append("|initialBytesToStrip:")
+				.append(initialBytesToStrip));
+	}
+
+	public NxqDecoder(int maxFrameLength, int lengthFieldOffset,
 			int lengthFieldLength, int lengthAdjustment) throws IOException {
 		super(maxFrameLength, lengthFieldOffset, lengthFieldLength,
 				lengthAdjustment, 0);
 		LOGGER.debug(new StringBuffer("ServerHandler Constructor|:")
 				.append(maxFrameLength).append("|lengthFieldOffset:")
 				.append(lengthFieldOffset).append("|lengthFieldLength:")
-				.append(lengthFieldLength));
+				.append(lengthFieldLength).append("|lengthAdjustment:")
+				.append(lengthAdjustment).append("|initialBytesToStrip:0"));
 	}
 
 	@Override
 	protected Object decode(ChannelHandlerContext ctx, ByteBuf in)
 			throws Exception {
 		ByteBuf frame = (ByteBuf) super.decode(ctx, in);
+		LOGGER.debug("frame:" + frame);
 		if (frame == null) {
 			return null;// 空的就不管了
 		}
@@ -59,9 +74,9 @@ public class NxqDecoder extends LengthFieldBasedFrameDecoder {
 		// bmsg.setData(frame);
 		bmsg.setHeader(header);
 
-		LOGGER.info(header);
+		LOGGER.debug(header);
 
-		return null;// super.decode(ctx, in);
+		return bmsg;// super.decode(ctx, in);
 	}
 
 }

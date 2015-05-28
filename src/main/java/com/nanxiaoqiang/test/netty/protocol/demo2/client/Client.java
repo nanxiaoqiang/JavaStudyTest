@@ -49,7 +49,7 @@ public class Client {
 						protected void initChannel(SocketChannel ch)
 								throws Exception {
 							ch.pipeline().addLast(
-									new NxqDecoder(1024 * 1024, 5, 3, 10));
+									new NxqDecoder(1024 * 1024, 4, 2, 8));
 							ch.pipeline().addLast("MessageEncoder",
 									new NxqEncoder());
 						}

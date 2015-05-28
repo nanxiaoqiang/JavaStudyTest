@@ -19,7 +19,7 @@ public class NxqEncoder extends MessageToByteEncoder<BaseMessage> {
 			ByteBuf out) throws Exception {
 		if (msg == null || msg.getHeader() == null)
 			throw new Exception("The encode message is null");
-
+		LOGGER.debug(msg);
 		out.writeByte(msg.getHeader().getSystemId());
 		out.writeShort(msg.getHeader().getLength());
 		out.writeByte(msg.getHeader().getMultiFlag());
