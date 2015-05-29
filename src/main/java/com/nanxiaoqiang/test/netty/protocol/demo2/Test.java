@@ -13,6 +13,7 @@ import com.nanxiaoqiang.test.netty.protocol.demo2.client.Client;
 import com.nanxiaoqiang.test.netty.protocol.demo2.client.NettyServerInit;
 import com.nanxiaoqiang.test.netty.protocol.demo2.msg.BaseMessage;
 import com.nanxiaoqiang.test.netty.protocol.demo2.msg.Header;
+import com.nanxiaoqiang.test.netty.protocol.demo2.msg.MsgType;
 
 public class Test {
 	public static Client server;
@@ -48,7 +49,8 @@ public class Test {
 		}
 		System.out.println("lalala");
 		BaseMessage msg = new BaseMessage();
-		Header h = new Header((short) 0, (short) 0, (short) 0x03);
+		Header h = new Header((short) 0, (short) 0,
+				MsgType.MSG_BEATHEART.getType());
 		msg.setHeader(h);
 		LOGGER.debug(msg);
 		Client.client.getCf().channel().writeAndFlush(msg);

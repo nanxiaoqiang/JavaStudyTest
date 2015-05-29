@@ -13,6 +13,10 @@ public enum MsgType {
 		this.type = type;
 	}
 
+	public short getType() {
+		return type;
+	}
+
 	@Override
 	public String toString() {
 		return String.valueOf(this.type);
