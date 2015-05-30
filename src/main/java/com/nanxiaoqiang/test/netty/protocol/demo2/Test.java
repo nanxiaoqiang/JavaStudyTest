@@ -47,12 +47,12 @@ public class Test {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// System.out.println("lalala");
-		// BaseMessage msg = new BaseMessage();
-		// Header h = new Header((short) 0, (short) 0,
-		// MsgType.MSG_BEATHEART.getType());
-		// msg.setHeader(h);
-		// LOGGER.debug(msg);
-		// Client.client.getCf().channel().writeAndFlush(msg);
+		System.out.println("lalala");
+		BaseMessage msg = new BaseMessage();
+		Header h = new Header((short) 0, (short) 0,
+				MsgType.MSG_ALL_EQP_STATUS.getType());
+		msg.setHeader(h);
+		LOGGER.debug(msg);
+		Client.client.getCf().channel().writeAndFlush(msg);
 	}
 }

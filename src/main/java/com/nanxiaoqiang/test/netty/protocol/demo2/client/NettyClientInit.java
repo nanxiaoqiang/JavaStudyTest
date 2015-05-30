@@ -12,6 +12,7 @@ public class NettyClientInit implements Runnable {
 	boolean isStart = false;
 
 	public NettyClientInit() {
+		Client.client = new Client("127.0.0.1", 8080);
 	}
 
 	public void shutDown() {
@@ -23,16 +24,19 @@ public class NettyClientInit implements Runnable {
 		while (isRunning) {
 			try {
 				if (!isStart) {
-					isStart = Client.client.connect();
+					Client.client.connect();
 				}
-				TimeUnit.SECONDS.sleep(5);
-			} catch (InterruptedException e) {
+			} catch (Throwable e) {
 				LOGGER.error("启动NettyServer未成功。" + e.getMessage());
 				e.printStackTrace();
 			} finally {
 				LOGGER.debug("关闭Netty。并准备重新启动。");
-				// Client.server.shutDown();
-				isStart = false;
+				try {
+					TimeUnit.SECONDS.sleep(5);
+					Client.client.connect();
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
