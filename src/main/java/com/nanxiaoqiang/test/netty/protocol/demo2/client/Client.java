@@ -52,6 +52,8 @@ public class Client {
 									new NxqDecoder(1024 * 1024, 4, 2, 8));
 							ch.pipeline().addLast("MessageEncoder",
 									new NxqEncoder());
+							ch.pipeline().addLast("HeartBeatClientHandler",
+									new HeartBeatClientHandler());
 						}
 					});
 

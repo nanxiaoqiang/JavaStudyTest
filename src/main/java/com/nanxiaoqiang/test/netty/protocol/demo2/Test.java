@@ -10,7 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.nanxiaoqiang.test.netty.protocol.demo2.client.Client;
-import com.nanxiaoqiang.test.netty.protocol.demo2.client.NettyServerInit;
+import com.nanxiaoqiang.test.netty.protocol.demo2.client.NettyClientInit;
 import com.nanxiaoqiang.test.netty.protocol.demo2.msg.BaseMessage;
 import com.nanxiaoqiang.test.netty.protocol.demo2.msg.Header;
 import com.nanxiaoqiang.test.netty.protocol.demo2.msg.MsgType;
@@ -39,7 +39,7 @@ public class Test {
 						+ this.i.incrementAndGet());
 			}
 		});
-		NettyServerInit nettyThread = new NettyServerInit();
+		NettyClientInit nettyThread = new NettyClientInit();
 		executorService.execute(nettyThread);
 		try {
 			TimeUnit.SECONDS.sleep(5);
@@ -47,12 +47,12 @@ public class Test {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("lalala");
-		BaseMessage msg = new BaseMessage();
-		Header h = new Header((short) 0, (short) 0,
-				MsgType.MSG_BEATHEART.getType());
-		msg.setHeader(h);
-		LOGGER.debug(msg);
-		Client.client.getCf().channel().writeAndFlush(msg);
+		// System.out.println("lalala");
+		// BaseMessage msg = new BaseMessage();
+		// Header h = new Header((short) 0, (short) 0,
+		// MsgType.MSG_BEATHEART.getType());
+		// msg.setHeader(h);
+		// LOGGER.debug(msg);
+		// Client.client.getCf().channel().writeAndFlush(msg);
 	}
 }

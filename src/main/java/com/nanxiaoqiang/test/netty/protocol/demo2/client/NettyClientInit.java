@@ -5,13 +5,13 @@ import java.util.concurrent.TimeUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class NettyServerInit implements Runnable {
-	private static Logger LOGGER = LogManager.getLogger(NettyServerInit.class
+public class NettyClientInit implements Runnable {
+	private static Logger LOGGER = LogManager.getLogger(NettyClientInit.class
 			.getName());
 	boolean isRunning = true;
 	boolean isStart = false;
 
-	public NettyServerInit() {
+	public NettyClientInit() {
 	}
 
 	public void shutDown() {
