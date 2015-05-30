@@ -47,6 +47,17 @@ public class HeartBeatClientHandler extends ChannelHandlerAdapter {
 		}
 	}
 
+	@Override
+	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
+			throws Exception {
+		cause.printStackTrace();
+		if (heartBeat != null) {
+			heartBeat.cancel(true);
+			heartBeat = null;
+		}
+		super.exceptionCaught(ctx, cause);
+	}
+
 	public class HeartBeatTask implements Runnable {
 
 		private final ChannelHandlerContext ctx;
