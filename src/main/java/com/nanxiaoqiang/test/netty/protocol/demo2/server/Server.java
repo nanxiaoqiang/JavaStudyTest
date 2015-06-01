@@ -20,19 +20,29 @@ public class Server {
 
 	private static Logger LOGGER = LogManager.getLogger(Server.class.getName());
 
-	static final int PORT = Integer
-			.parseInt(System.getProperty("port", "8080"));
+	static int PORT = Integer.parseInt(System.getProperty("port", "8080"));
 
 	private ChannelFuture cf;
 
-	EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-	EventLoopGroup workerGroup = new NioEventLoopGroup();
+	private final EventLoopGroup bossGroup = new NioEventLoopGroup(1);
+	private final EventLoopGroup workerGroup = new NioEventLoopGroup();
 
-	public Server() {
+	private Server() {
+		this(PORT);
 	}
 
+	public Server(int port) {
+		if (port <= 1000)
+			PORT = 8080;
+		else
+			PORT = port;
+	}
+
+	public static Server server = null;// new Server();
+
 	public static void main(String[] args) throws Exception {
-		new Server().startup();
+		Server.server = new Server();
+		Server.server.startup();
 	}
 
 	protected void startup() throws Exception {
@@ -45,6 +55,8 @@ public class Server {
 						@Override
 						protected void initChannel(SocketChannel ch)
 								throws Exception {
+							ch.pipeline().addLast("WhiteListHandler",
+									new WriteListHandler());
 							ch.pipeline().addLast(
 									new NxqDecoder(1024 * 1024, 4, 2, 8));
 							ch.pipeline().addLast("MessageEncoder",
