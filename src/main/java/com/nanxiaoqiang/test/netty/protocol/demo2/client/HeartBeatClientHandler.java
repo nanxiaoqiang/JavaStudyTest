@@ -75,8 +75,7 @@ public class HeartBeatClientHandler extends ChannelHandlerAdapter {
 
 		private BaseMessage buildHeatBeat() {
 			BaseMessage msg = new BaseMessage();
-			Header h = new Header((short) 0, (short) 0,
-					MsgType.MSG_BEATHEART.getType());
+			Header h = new Header(MsgType.MSG_BEATHEART.getType());
 			msg.setHeader(h);
 			return msg;
 		}

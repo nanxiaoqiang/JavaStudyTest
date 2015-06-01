@@ -63,7 +63,7 @@ public class Header implements Serializable {
 		this.length = length;
 		this.multiFlag = multiFlag;
 		this.messageLength = messageLength;
-		this.time = new Long(System.currentTimeMillis() * 1000).intValue();
+		this.time = (int) (System.currentTimeMillis() / 1000);// 时间采用int
 		this.version = version;
 		this.msgId = msgId;
 	}
@@ -74,7 +74,7 @@ public class Header implements Serializable {
 		this.length = length;
 		this.multiFlag = multiFlag;
 		this.messageLength = messageLength;
-		this.time = new Long(System.currentTimeMillis() * 1000).intValue();
+		this.time = (int) (System.currentTimeMillis() / 1000);// 时间采用int
 		this.version = Constants.CURRENT_VERSION;
 		this.msgId = msgId;
 	}
@@ -91,7 +91,22 @@ public class Header implements Serializable {
 		this.length = length;
 		this.multiFlag = Constants.IS_NOT_MULTIPLE;
 		this.messageLength = messageLength;
-		this.time = new Long(System.currentTimeMillis() * 1000).intValue();
+		this.time = (int) (System.currentTimeMillis() / 1000);// 时间采用int
+		this.version = Constants.CURRENT_VERSION;
+		this.msgId = msgId;
+	}
+
+	/**
+	 * 
+	 * @param msgId
+	 */
+	public Header(short msgId) {
+		super();
+		this.systemId = Constants.SYSTEMID;
+		this.length = (short) 0;
+		this.multiFlag = Constants.IS_NOT_MULTIPLE;
+		this.messageLength = (short) 0;
+		this.time = (int) (System.currentTimeMillis() / 1000);// 时间采用int
 		this.version = Constants.CURRENT_VERSION;
 		this.msgId = msgId;
 	}
