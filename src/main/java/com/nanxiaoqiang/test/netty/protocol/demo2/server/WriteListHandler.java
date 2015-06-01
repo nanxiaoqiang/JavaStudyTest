@@ -55,4 +55,19 @@ public class WriteListHandler extends ChannelHandlerAdapter {
 			ctx.close();
 		}
 	}
+
+	@Override
+	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
+			throws Exception {
+		LOGGER.error(cause.getMessage());
+		// 从channelGroup中移除channel
+		AllChannelGroup.getChannelgroups().remove(ctx.channel());
+		// 输出channelGroup的大小
+		LOGGER.debug("channelGroups:"
+				+ AllChannelGroup.getChannelgroups().size());
+		// 关闭
+		ctx.close();
+		ctx.fireExceptionCaught(cause);
+		// cause.printStackTrace();
+	}
 }
