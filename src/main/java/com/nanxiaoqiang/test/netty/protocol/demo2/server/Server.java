@@ -20,7 +20,8 @@ public class Server {
 
 	private static Logger LOGGER = LogManager.getLogger(Server.class.getName());
 
-	static int PORT = Integer.parseInt(System.getProperty("port", "8080"));
+	private static int PORT = Integer.parseInt(System.getProperty("port",
+			"8080"));
 
 	private ChannelFuture cf;
 
