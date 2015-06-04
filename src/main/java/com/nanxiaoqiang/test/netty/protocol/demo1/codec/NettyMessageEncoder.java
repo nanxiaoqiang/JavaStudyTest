@@ -65,10 +65,15 @@ public final class NettyMessageEncoder extends
 	key = null;
 	keyArray = null;
 	value = null;
-	if (msg.getBody() != null) {
+	// Head End
+	
+	// Body Start
+	if (msg.getBody() != null) {// 如果有消息
 	    marshallingEncoder.encode(msg.getBody(), sendBuf);
 	} else
-	    sendBuf.writeInt(0);
-	sendBuf.setInt(4, sendBuf.readableBytes() - 8);
+		// 如果没消息
+	    sendBuf.writeInt(0);// 加一个长度为0的int
+		sendBuf.setInt(4, sendBuf.readableBytes() - 8);// 设置长度，0~3为CRC，4~7是长度，总长度减去前8位
     }
+    // Body End
 }

@@ -25,15 +25,15 @@ import java.util.Map;
  */
 public final class Header {
 
-    private int crcCode = 0xabef0101;
+    private int crcCode = 0xabef0101;// 4 0~3
 
-    private int length;// 消息长度
+    private int length;// 消息长度 4 4~7
 
-    private long sessionID;// 会话ID
+    private long sessionID;// 会话ID 8 8~15
 
-    private byte type;// 消息类型
+    private byte type;// 消息类型 1 16
 
-    private byte priority;// 消息优先级
+    private byte priority;// 消息优先级 1 17
 
     private Map<String, Object> attachment = new HashMap<String, Object>(); // 附件
 
