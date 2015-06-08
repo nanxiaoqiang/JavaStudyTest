@@ -46,6 +46,7 @@
 		<aspectj.version>1.8.5</aspectj.version>
 		<jredis.version>2.7.0</jredis.version>
 		<jboss-marshalling.version>1.4.10.Final</jboss-marshalling.version>
+		<apache-avero.version>1.7.7</apache-avero.version>
 	</properties>
 
 	<!-- 如有Nexus私服, 取消注释并指向正确的服务器地址. -->
@@ -287,14 +288,14 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>${aspectj.version}</version>
 		</dependency>
-		
+
 		<!-- JEDIS -->
 		<dependency>
-    		<groupId>redis.clients</groupId>
-    		<artifactId>jedis</artifactId>
-    		<version>${jredis.version}</version>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>${jredis.version}</version>
 		</dependency>
-		
+
 		<!-- 序列化 -->
 		<dependency>
 			<groupId>org.jboss.marshalling</groupId>
@@ -306,22 +307,58 @@
 			<artifactId>jboss-marshalling-serial</artifactId>
 			<version>${jboss-marshalling.version}</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>org.apache.avro</groupId>
+			<artifactId>avro</artifactId>
+			<version>${apache-avero.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.avro</groupId>
+			<artifactId>avro-tools</artifactId>
+			<version>${apache-avero.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
-		<plugins>
-			<!-- compiler插件, 设定JDK版本 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-					<showWarnings>true</showWarnings>
-				</configuration>
-			</plugin>
-		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!-- apache avro 自动编译 -->
+				<plugin>
+					<groupId>org.apache.avro</groupId>
+					<artifactId>avro-maven-plugin</artifactId>
+					<version>${apache-avero.version}</version>
+					<executions>
+						<execution>
+							<id>schemas</id>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>schema</goal>
+							</goals>
+							<configuration>
+								<includes>
+									<include>user.avsc</include>
+								</includes>
+								<!-- 生成命令mvn generate-sources -->
+								<sourceDirectory>${project.basedir}/src/main/java/com/nanxiaoqiang/test/apache/avro/avro/</sourceDirectory>
+								<outputDirectory>${project.basedir}/src/main/java/com/nanxiaoqiang/test/apache/avro/java/</outputDirectory>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<!-- compiler插件, 设定JDK版本 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.1</version>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+						<showWarnings>true</showWarnings>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 </project>
