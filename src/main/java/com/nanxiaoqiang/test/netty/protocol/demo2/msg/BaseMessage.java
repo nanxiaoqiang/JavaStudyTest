@@ -14,15 +14,15 @@ public class BaseMessage implements Serializable {
 
 	private Header header;
 
-	private byte[] data;// 临时
+	private Object body;// 临时
 
 	public BaseMessage() {
 	}
 
-	public BaseMessage(Header header, byte[] data) {
+	public BaseMessage(Header header, Object body) {
 		super();
 		this.header = header;
-		this.data = data;
+		this.body = body;
 	}
 
 	public Header getHeader() {
@@ -33,12 +33,12 @@ public class BaseMessage implements Serializable {
 		this.header = header;
 	}
 
-	public byte[] getData() {
-		return data;
+	public Object getBody() {
+		return body;
 	}
 
-	public void setData(byte[] data) {
-		this.data = data;
+	public void setBody(Object body) {
+		this.body = body;
 	}
 
 	@Override

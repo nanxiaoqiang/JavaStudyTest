@@ -6,9 +6,14 @@ import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 
 import java.io.IOException;
 
+import org.apache.avro.io.DatumReader;
+import org.apache.avro.io.Decoder;
+import org.apache.avro.io.DecoderFactory;
+import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.nanxiaoqiang.test.apache.avro.java.User;
 import com.nanxiaoqiang.test.netty.protocol.demo2.msg.BaseMessage;
 import com.nanxiaoqiang.test.netty.protocol.demo2.msg.Header;
 
@@ -75,8 +80,19 @@ public class NxqDecoder extends LengthFieldBasedFrameDecoder {
 		bmsg.setHeader(header);
 
 		LOGGER.debug(header);
-
+		if (header.getMessageLength() > 0) {
+			byte[] b = new byte[header.getMessageLength()];
+			frame.readBytes(b);
+			// ByteBuf buf = in.slice(frame.readerIndex(),
+			// header.getLength());//
+			// 读取Data size大小的数据
+			DatumReader<User> reader = new SpecificDatumReader<User>(User.class);
+			Decoder decoder = DecoderFactory.get().binaryDecoder(b, null);
+			User result = reader.read(null, decoder);
+			// in.readerIndex(in.readerIndex() + header.getLength());// 移动指针到结尾
+			bmsg.setBody(result);
+		}
+		LOGGER.debug(bmsg);
 		return bmsg;// super.decode(ctx, in);
 	}
-
 }

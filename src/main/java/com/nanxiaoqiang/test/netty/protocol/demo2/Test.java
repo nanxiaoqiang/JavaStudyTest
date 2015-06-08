@@ -9,6 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.nanxiaoqiang.test.apache.avro.java.User;
 import com.nanxiaoqiang.test.netty.protocol.demo2.client.Client;
 import com.nanxiaoqiang.test.netty.protocol.demo2.client.NettyClientInit;
 import com.nanxiaoqiang.test.netty.protocol.demo2.msg.BaseMessage;
@@ -51,6 +52,11 @@ public class Test {
 		BaseMessage msg = new BaseMessage();
 		Header h = new Header((short) 0, (short) 0,
 				MsgType.MSG_ALL_EQP_STATUS.getType());
+		User user1 = new User();
+		user1.setName("nanxiaoqiang");
+		user1.setFavoriteNumber(19850226);
+		user1.setFavoriteColor("violet");
+		msg.setBody(user1);
 		msg.setHeader(h);
 		LOGGER.debug(msg);
 		Client.client.getCf().channel().writeAndFlush(msg);
