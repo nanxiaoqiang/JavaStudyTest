@@ -46,12 +46,31 @@ public class FinallyTest {
 		}
 	}
 
+	public int getNumByStr2(String str) {
+		int num = 0;
+		try {
+			num = Integer.parseInt(str);
+			// int num not use
+			return num;
+		} catch (NumberFormatException e) {
+			// e.printStackTrace();
+			logger.info("NumberFormatException");
+			num = 255;
+			return num;
+		} finally {
+			logger.info("getNumByStr2 finally");
+			num = 128;// 这句话没有作用哦
+			// return -1;
+		}
+	}
+
 	public FinallyTest() {
 	}
 
 	public static void main(String[] args) {
 		FinallyTest t = new FinallyTest();
 		logger.info("getNumByStr:" + t.getNumByStr("123a"));
+		logger.info("getNumByStr2:" + t.getNumByStr2("123a"));
 		logger.info("getNumByStrStatic:" + getNumByStrStatic("123a"));
 		// 输出：
 		// 两种都是一样的
