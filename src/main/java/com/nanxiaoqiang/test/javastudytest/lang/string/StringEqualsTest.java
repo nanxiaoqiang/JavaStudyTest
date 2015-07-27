@@ -14,6 +14,8 @@ public class StringEqualsTest {
 	String b1 = a1 + "b";
 	String b2 = a2 + "b";
 	String b = "ab";
+	static String c = "ab";
+	String d = null;
 
 	public StringEqualsTest() {
 	}
@@ -37,10 +39,24 @@ public class StringEqualsTest {
 		t.test();
 		String x = "ab";
 		String x1 = t.getA2() + "b";
-
+		System.out.println("*************");
 		System.out.println(x1 == x);// false
 		System.out.println(x1 == t.b);// false
 		System.out.println(x1 == t.b1);// false
 		System.out.println(x1 == t.b2);// false
+		System.out.println("*************");
+		System.out.println(c == x);
+		System.out.println(c == x1);
+		System.out.println(c == t.b);
+		System.out.println(c == t.b1);
+		System.out.println(c == t.b2);
+		t.d = "ab";
+		System.out.println("*************");
+		System.out.println(t.d == x);
+		System.out.println(t.d == x1);
+		System.out.println(t.d == t.b);
+		System.out.println(t.d == t.b1);
+		System.out.println(t.d == t.b2);
+
 	}
 }
