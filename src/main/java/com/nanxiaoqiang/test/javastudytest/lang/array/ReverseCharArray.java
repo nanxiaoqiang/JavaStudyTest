@@ -25,7 +25,7 @@ public class ReverseCharArray {
 				sb.append(c[i]);
 			}
 		}
-		return sb.reverse().equals(sb.toString());
+		return sb.reverse().toString().equals(sb.toString());
 	}
 
 	/**
