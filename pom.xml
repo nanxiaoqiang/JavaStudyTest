@@ -21,14 +21,14 @@
 		<activemq.version>5.11.0</activemq.version>
 		<mysql.jdbc.driver.version>5.1.33</mysql.jdbc.driver.version>
 		<oracle.jdbc.driver.version>11.2.0.1</oracle.jdbc.driver.version>
-		<commons-collections4.version>4.0</commons-collections4.version>
+		<commons-collections4.version>4.1</commons-collections4.version>
 		<commons-configuration.version>1.10</commons-configuration.version>
-		<commons-dbcp2.version>2.0.1</commons-dbcp2.version>
+		<commons-dbcp2.version>2.1.1</commons-dbcp2.version>
 		<commons-dbutils.version>1.6</commons-dbutils.version>
-		<commons-io.version>2.4</commons-io.version>
+		<commons-io.version>2.5</commons-io.version>
 		<commons-lang3.version>3.4</commons-lang3.version>
 		<commons-net.version>3.3</commons-net.version>
-		<log4j.version>2.2</log4j.version>
+		<log4j.version>2.6.2</log4j.version>
 		<guava.version>18.0</guava.version>
 		<mmca-main-commons.version>0.0.1-beta</mmca-main-commons.version>
 		<netty.version>5.0.0.Alpha2</netty.version>
@@ -42,7 +42,7 @@
 		<cglib.version>3.1</cglib.version>
 		<rabbitma-client.version>3.5.0</rabbitma-client.version>
 		<xmemcached.version>2.0.0</xmemcached.version>
-		<spring.version>4.1.5.RELEASE</spring.version>
+		<spring.version>4.3.0.RELEASE</spring.version>
 		<aspectj.version>1.8.5</aspectj.version>
 		<jredis.version>2.7.0</jredis.version>
 		<jboss-marshalling.version>1.4.10.Final</jboss-marshalling.version>
