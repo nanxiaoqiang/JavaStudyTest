@@ -31,13 +31,19 @@ public class Test {
 		asyncService.doSomeThing5sec();
 		logger.info("Hehehehe");
 
-		while (!future.isDone()) {
-			try {
-				logger.info(future.get());
-			} catch (InterruptedException | ExecutionException e) {
-				e.printStackTrace();
-			}
+		try {
+			String str = future.get();
+			logger.info(str);
+		} catch (InterruptedException | ExecutionException e) {
+			e.printStackTrace();
 		}
+//		while (!future.isDone()) {
+//			try {
+//				logger.info(future.get());
+//			} catch (InterruptedException | ExecutionException e) {
+//				e.printStackTrace();
+//			}
+//		}
 		logger.info("The FIN");
 	}
 }

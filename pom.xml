@@ -42,7 +42,8 @@
 		<cglib.version>3.1</cglib.version>
 		<rabbitma-client.version>3.5.0</rabbitma-client.version>
 		<xmemcached.version>2.0.0</xmemcached.version>
-		<spring.version>4.3.0.RELEASE</spring.version>
+		<spring.version>4.3.1.RELEASE</spring.version>
+		<spring.data.redis.version>1.7.2.RELEASE</spring.data.redis.version>
 		<aspectj.version>1.8.5</aspectj.version>
 		<jredis.version>2.7.0</jredis.version>
 		<jboss-marshalling.version>1.4.10.Final</jboss-marshalling.version>
@@ -295,6 +296,12 @@
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
 			<version>${jredis.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>${spring.data.redis.version}</version>
 		</dependency>
 
 		<!-- 序列化 -->
