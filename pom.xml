@@ -351,6 +351,13 @@
 			<artifactId>hystrix-junit</artifactId>
 			<version>1.5.6</version>
 		</dependency>
+		
+		<!-- Jdk8字符处理 -->
+		<dependency>
+			<groupId>com.shekhargulati</groupId>
+			<artifactId>strman</artifactId>
+			<version>0.2.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
